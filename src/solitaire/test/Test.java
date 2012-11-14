@@ -21,10 +21,10 @@ import solitaire.presentation.PSabot;
 import solitaire.presentation.PTasDeCartes;
 
 /**
- * @author engel test des différents objets visuel
+ * @author engel test des diffï¿½rents objets visuel
  */
 public class Test extends JFrame {
-
+	//test vianney
 	private static final long serialVersionUID = 7243944635891289052L;
 
 	public static void main(String[] args) {
@@ -34,10 +34,10 @@ public class Test extends JFrame {
 		//testTasDeCartes(jt, "Test TasDeCartes");
 		testSabot(jt, "Test Sabot");
 		
-		// taille de la fenêtre
+		// taille de la fenï¿½tre
 		jt.pack(); 
 
-		// centrer la fenêtre dans l'écran
+		// centrer la fenï¿½tre dans l'ï¿½cran
 		Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize();
 		Point origine = new Point((dimEcran.width - jt.getWidth())/2,
 				(dimEcran.height - jt.getHeight())/2);
@@ -55,13 +55,13 @@ public class Test extends JFrame {
 
 		// panneau du plan de jeu
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(new Color(163, 163, 215)); // mauve pâle
+		getContentPane().setBackground(new Color(163, 163, 215)); // mauve pï¿½le
 	}
 	/**
 	 * test des Cartes
 	 * 
-	 * @param fenetre où afficher les cartes
-	 * @param titre de la fenêtre ci-dessus
+	 * @param fenetre oï¿½ afficher les cartes
+	 * @param titre de la fenï¿½tre ci-dessus
 	 */
 	public static void testCarte(Test fenetre, String titre) {
 		fenetre.setTitle(titre);
@@ -75,7 +75,7 @@ public class Test extends JFrame {
 		pres1.setLocation(20, 20);
 		fenetre.getContentPane().add(pres1) ;
 
-		// une carte cachée
+		// une carte cachï¿½e
 		CCarte carte2 = (CCarte) usine.newCarte(1, 1);
 		PCarte pres2 = carte2.getPresentation();
 		carte2.setFaceVisible(false);
@@ -91,15 +91,15 @@ public class Test extends JFrame {
 	/**
 	 * test des TasDeCartes
 	 * 
-	 * @param fenetre où afficher les cartes
-	 * @param titre de la fenêtre ci-dessus
+	 * @param fenetre oï¿½ afficher les cartes
+	 * @param titre de la fenï¿½tre ci-dessus
 	 */
 	public static void testTasDeCartes(Test fenetre, String titre) {
 		fenetre.setTitle(titre);
 		
 		CUsine usine = new CUsine();
 		
-		// deux cartes cachées, une carte visible verticales
+		// deux cartes cachï¿½es, une carte visible verticales
 		CTasDeCartes tas1 = (CTasDeCartes) usine.newTasDeCartes("test_cache", usine);
 		PTasDeCartes pres1 = tas1.getPresentation();
 		CCarte carte = (CCarte) usine.newCarte(1, 1);
