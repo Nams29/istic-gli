@@ -32,9 +32,6 @@ public class PTasAlterne extends JPanel {
 		
 		this.setSize(minSize);
 		this.setPreferredSize(minSize);
-		this.setMinimumSize(minSize);
-		
-		this.setDxDy(0, 30);
 		
 		this.setLayout(null);
 	}

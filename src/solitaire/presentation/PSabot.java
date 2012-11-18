@@ -7,9 +7,6 @@ import javax.swing.JPanel;
 
 import solitaire.controle.CSabot;
 
-/**
- * Composant Pr�sentation d'une carte
- */
 public class PSabot extends JPanel {
 	
 	private static final long serialVersionUID = 5119385230762345237L;

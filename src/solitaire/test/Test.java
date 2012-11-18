@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 
 import solitaire.application.TasDeCartes;
 import solitaire.controle.CCarte;
+import solitaire.controle.CColonne;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasAlterne;
 import solitaire.controle.CTasDeCartes;
@@ -33,7 +34,8 @@ public class Test extends JFrame {
 		//testCarte(jt, "Test Carte");
 		//testTasDeCartes(jt, "Test TasDeCartes");
 		//testSabot(jt, "Test Sabot");
-		testTasAlterne(jt, "Test TasAlterne");
+		//testTasAlterne(jt, "Test TasAlterne");
+		testColonne(jt, "Test Colonne");
 		
 		// taille de la fen�tre
 		jt.pack(); 
@@ -100,7 +102,7 @@ public class Test extends JFrame {
 		
 		CUsine usine = new CUsine();
 		
-		// deux cartes cach�es, une carte visible verticales
+		// deux cartes cachées, une carte visible verticales
 		CTasDeCartes tas1 = (CTasDeCartes) usine.newTasDeCartes("test_cache", usine);
 		PTasDeCartes pres1 = tas1.getPresentation();
 		CCarte carte = (CCarte) usine.newCarte(1, 1);
@@ -178,6 +180,32 @@ public class Test extends JFrame {
 		tasAlt.empiler(usine.newCarte(10, 4));
 		
 		fenetre.getContentPane().add(tasAlt.getPresentation());
+		
+		// taille du conteneur
+		Dimension d = new Dimension(300, 200);
+		fenetre.getContentPane().setSize(d);
+		fenetre.getContentPane().setPreferredSize(d);
+	}
+	
+	public static void testColonne(Test fenetre, String title) {
+		fenetre.setTitle(title);
+		
+		CUsine usine = new CUsine();
+		
+		// Creation colonne
+		CColonne col = (CColonne) usine.newColonne("colonne test", usine);
+			CTasDeCartes tas1 = (CTasDeCartes) usine.newTasDeCartes("caché", usine);
+			PTasDeCartes pres1 = tas1.getPresentation();
+			pres1.setDxDy(0, 10);
+			tas1.empiler(usine.newCarte(8, 2));
+			tas1.empiler(usine.newCarte(1, 3));
+			tas1.empiler(usine.newCarte(12, 1));
+			tas1.empiler(usine.newCarte(7, 1));
+		col.setReserve(tas1);
+		
+		//col.retournerCarte();
+		
+		fenetre.getContentPane().add(col.getPresentation());
 		
 		// taille du conteneur
 		Dimension d = new Dimension(300, 200);

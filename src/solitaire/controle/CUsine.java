@@ -1,10 +1,6 @@
 package solitaire.controle;
 
-import solitaire.application.Carte;
-import solitaire.application.Sabot;
-import solitaire.application.TasDeCartes;
-import solitaire.application.TasDeCartesAlternees;
-import solitaire.application.Usine;
+import solitaire.application.*;
 
 public class CUsine extends Usine {
 	
@@ -30,5 +26,10 @@ public class CUsine extends Usine {
 	@Override
 	public TasDeCartesAlternees newTasDeCartesAlternees(String nom, Usine usine) {
 		return new CTasAlterne(nom, usine);
+	}
+	
+	@Override
+	public Colonne newColonne(String nom, Usine usine) {
+		return new CColonne(nom, usine);
 	}
 }

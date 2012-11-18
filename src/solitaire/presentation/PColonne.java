@@ -1,57 +1,64 @@
 package solitaire.presentation ;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
 import solitaire.controle.CColonne;
-import solitaire.controle.CSabot;
 
-/**
- * Composant Présentation d'une carte
- */
 public class PColonne extends JPanel {
 	
 	private static final long serialVersionUID = 5119385230762345237L;
 	
-	
-	private PTasDeCartes cache;
-	private PTasDeCartes visible;
 	private CColonne controleur;
 	
-	public PColonne(CColonne cColonne, PTasDeCartes tas1,
-			PTasDeCartes tas2) { 
-		
-		
+	private PTasDeCartes hiddenDeck;
+	private PTasAlterne alternateDeck;
+	
+	private static int DX = 0;
+	private static int DY = 30;
+	
+	public PColonne(CColonne cColonne, PTasDeCartes tas1, PTasAlterne tas2) { 
 		this.controleur = cColonne;
+		this.hiddenDeck = tas1;
+		this.alternateDeck = tas2;
 		
-		// Dimension
-		this.setBackground(Color.GRAY);
-		this.setSize(2*PCarte.largeur+40, PCarte.hauteur+10);
-		this.setPreferredSize(getSize());
-		
-		
-		
-		this.controleur = cColonne;
-		this.cache = tas1;
-		this.visible = tas2;
-		
-		// Tas de cartes
-		this.cache.setDxDy(0, 15);
-		this.visible.setDxDy(0, 15);
-		
-		// Affichage
-		this.setLayout(new BorderLayout());
-		this.add(cache, BorderLayout.WEST);
-		this.visible.setBackground(Color.PINK);
-		this.add(visible, BorderLayout.CENTER);
-		
-		// Dimension
-		this.setBackground(Color.GRAY);
-		this.setSize(2*PCarte.largeur+40, PCarte.hauteur+10);
-		this.setPreferredSize(getSize());
-		
+		this.initLayout();
 	}
+	
+	/**
+	 * Initiate graphic elements
+	 */
+	private void initLayout() {
+		this.hiddenDeck.setDxDy(DX, DY);
+		this.alternateDeck.setDxDy(DX, DY);
+		
+		this.setLayout(null);
+
+		this.add(alternateDeck);
+		this.add(hiddenDeck);
+	}
+	
+	/**
+	 * Set the size of the hidden deck
+	 * @param nbCartes the cards on the hidden deck
+	 */
+	public void setSize() {
+		int nbHidden = controleur.getNombreCache();
+		int nbVisible = controleur.getNombre();
+		
+		// Decalage des cartes visibles
+		this.alternateDeck.setLocation(nbHidden*DX, nbHidden*DY);
+		
+		// Taille colonne
+		int x = nbHidden*DX + nbVisible*DX - DX + PCarte.largeur;
+		int y = nbHidden*DY + nbVisible*DY - DY + PCarte.hauteur;
+		Dimension dimension = new Dimension(x, y);
+		this.setSize(dimension);
+		this.setPreferredSize(dimension);
+	}
+	
+	
 		
 } 
