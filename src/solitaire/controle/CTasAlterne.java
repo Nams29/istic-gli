@@ -24,10 +24,10 @@ public class CTasAlterne extends TasDeCartesAlternees {
 	
 	@Override
 	public void empiler(Carte c) {
-		//if (this.isEmpilable(c))  {
+		if (this.isEmpilable(c))  {
 			super.empiler(c);
 			this.presentation.empiler(((CCarte)c).getPresentation());
-		//}
+		}
 	}
 	
 	@Override

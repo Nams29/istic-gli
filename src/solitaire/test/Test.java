@@ -172,10 +172,10 @@ public class Test extends JFrame {
 		CTasAlterne tasAlt = (CTasAlterne) usine.newTasDeCartesAlternees("tas alterné test", usine);
 		
 		// Cartes
-		tasAlt.empiler(usine.newCarte(11, 1));
-		tasAlt.empiler(usine.newCarte(11, 2));
+		tasAlt.empiler(usine.newCarte(13, 1));
+		tasAlt.empiler(usine.newCarte(12, 2));
 		tasAlt.empiler(usine.newCarte(11, 3));
-		tasAlt.empiler(usine.newCarte(11, 4));
+		tasAlt.empiler(usine.newCarte(10, 4));
 		
 		fenetre.getContentPane().add(tasAlt.getPresentation());
 		
