@@ -18,7 +18,6 @@ import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CUsine;
 import solitaire.presentation.PCarte;
-import solitaire.presentation.PSabot;
 import solitaire.presentation.PTasDeCartes;
 
 /**

@@ -1,7 +1,7 @@
 package solitaire.presentation ;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
@@ -16,13 +16,13 @@ public class PSabot extends JPanel {
 	
 	private CSabot controleur;
 	
-	private PTasDeCartes cache;
-	private PTasDeCartes visible;
+	private PTasDeCartes hiddenDeck;
+	private PTasDeCartes visibleDeck;
 	
-	public PSabot(CSabot cSabot, PTasDeCartes tas1, PTasDeCartes tas2) {
+	public PSabot(CSabot cSabot, PTasDeCartes hiddenDeck, PTasDeCartes visibleDeck) {
 		this.controleur = cSabot;
-		this.cache = tas1;
-		this.visible = tas2;
+		this.hiddenDeck = hiddenDeck;
+		this.visibleDeck = visibleDeck;
 		
 		// Layout
 		this.initLayout();
@@ -38,22 +38,13 @@ public class PSabot extends JPanel {
 	 */
 	private void initLayout() {
 		// Tas de cartes
-		this.cache.setDxDy(0, 0);
-		this.visible.setDxDy(15, 0);
-		this.visible.setBackground(Color.PINK);
+		this.hiddenDeck.setDxDy(0, 0);
+		this.visibleDeck.setDxDy(15, 0);
 		
 		// Affichage
-		this.setLayout(new BorderLayout());
-		this.add(cache, BorderLayout.WEST);
-		this.add(visible, BorderLayout.CENTER);
-	}
-	
-	/**
-	 * Add a card at the top of the hidden cards
-	 * @param card the card to add
-	 */
-	public void empiler(PCarte card) {
-		this.cache.add(card);
+		this.setLayout(new FlowLayout());
+		this.add(hiddenDeck);
+		this.add(visibleDeck);
 	}
 	
 } 
