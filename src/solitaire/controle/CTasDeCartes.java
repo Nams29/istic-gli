@@ -31,18 +31,11 @@ public class CTasDeCartes extends TasDeCartes {
 	public void empiler(Carte c) {
 		if (this.isEmpilable(c)) {
 			super.empiler(c);
-			try {
-				if (this.getSommet() == c) {
-					this.presentation.empiler(((CCarte) c).getPresentation());
-				}
-			} catch (Exception e) {
-				System.out.println("Erreur en empilant : "+e.getMessage());
-			}
+			this.presentation.empiler(((CCarte) c).getPresentation());
 		}
 	}
 	
 	/**
-	 * Get the presentation
 	 * @return the presentation
 	 */
 	public PTasDeCartes getPresentation() {

@@ -15,6 +15,7 @@ import javax.swing.WindowConstants;
 import solitaire.application.TasDeCartes;
 import solitaire.controle.CCarte;
 import solitaire.controle.CSabot;
+import solitaire.controle.CTasAlterne;
 import solitaire.controle.CTasDeCartes;
 import solitaire.controle.CUsine;
 import solitaire.presentation.PCarte;
@@ -31,7 +32,8 @@ public class Test extends JFrame {
 
 		//testCarte(jt, "Test Carte");
 		//testTasDeCartes(jt, "Test TasDeCartes");
-		testSabot(jt, "Test Sabot");
+		//testSabot(jt, "Test Sabot");
+		testTasAlterne(jt, "Test TasAlterne");
 		
 		// taille de la fen�tre
 		jt.pack(); 
@@ -129,7 +131,7 @@ public class Test extends JFrame {
 		tas2.depiler();
 		pres2.setLocation(40 + PCarte.largeur, 20);
 		fenetre.getContentPane().add(pres2) ;
-
+		
 		// taille du conteneur
 		Dimension d = new Dimension(300, 200);
 		fenetre.getContentPane().setSize(d);
@@ -155,10 +157,30 @@ public class Test extends JFrame {
 		
 		fenetre.getContentPane().add(sabot.getPresentation());
 		
-		
-		
 		// taille du conteneur
 		Dimension d = new Dimension(2 * PCarte.largeur + 70, PCarte.hauteur + 45);
+		fenetre.getContentPane().setSize(d);
+		fenetre.getContentPane().setPreferredSize(d);
+	}
+	
+	public static void testTasAlterne(Test fenetre, String title) {
+		fenetre.setTitle(title);
+		
+		CUsine usine = new CUsine();
+		
+		// Creation tas alterné
+		CTasAlterne tasAlt = (CTasAlterne) usine.newTasDeCartesAlternees("tas alterné test", usine);
+		
+		// Cartes
+		tasAlt.empiler(usine.newCarte(11, 1));
+		tasAlt.empiler(usine.newCarte(11, 2));
+		tasAlt.empiler(usine.newCarte(11, 3));
+		tasAlt.empiler(usine.newCarte(11, 4));
+		
+		fenetre.getContentPane().add(tasAlt.getPresentation());
+		
+		// taille du conteneur
+		Dimension d = new Dimension(300, 200);
 		fenetre.getContentPane().setSize(d);
 		fenetre.getContentPane().setPreferredSize(d);
 	}

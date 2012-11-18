@@ -3,6 +3,7 @@ package solitaire.controle;
 import solitaire.application.Carte;
 import solitaire.application.Sabot;
 import solitaire.application.TasDeCartes;
+import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 
 public class CUsine extends Usine {
@@ -24,5 +25,10 @@ public class CUsine extends Usine {
 	@Override
 	public Sabot newSabot(String nom, Usine usine) {
 		return new CSabot(nom, usine);
+	}
+	
+	@Override
+	public TasDeCartesAlternees newTasDeCartesAlternees(String nom, Usine usine) {
+		return new CTasAlterne(nom, usine);
 	}
 }
