@@ -1,6 +1,7 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
@@ -12,14 +13,27 @@ public class PTasDeCartes extends JPanel {
 	
 	private CTasDeCartes controleur;
 	
+	private Dimension minSize = new Dimension(PCarte.largeur, PCarte.hauteur);
+	
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
 	
 	public PTasDeCartes(CTasDeCartes c) {
 		this.controleur = c;
+		
+		this.initLayout();
+	}
+	
+	/**
+	 * Initiate graphic elements
+	 */
+	private void initLayout() {
 		this.setBackground(Color.LIGHT_GRAY);
-		this.setSize(PCarte.largeur+10, PCarte.hauteur+10);
-		this.setPreferredSize(getSize());
+		
+		this.setSize(minSize);
+		this.setPreferredSize(minSize);
+		this.setMinimumSize(minSize);
+		
 		this.setLayout(null);
 	}
 	
@@ -29,8 +43,17 @@ public class PTasDeCartes extends JPanel {
 	 */
 	public void depiler(PCarte p) {
 		this.remove(p);
+		
+		Dimension dimension = new Dimension(this.getWidth()-this.dx, 
+											this.getHeight()-this.dy);
+		this.setSize(dimension);
+		this.setPreferredSize(dimension);
+		
 		this.cx = this.cx - this.dx;
 		this.cy = this.cy - this.dy;
+		
+		this.validate();
+		this.repaint();
 	}
 	
 	/**
@@ -38,12 +61,22 @@ public class PTasDeCartes extends JPanel {
 	 * @param p the card to add
 	 */
 	public void empiler(PCarte p) {
+		if (controleur.getNombre() > 1) {
+			Dimension dimension = new Dimension(this.getWidth()+this.dx, 
+												this.getHeight()+this.dy);
+			this.setSize(dimension);
+			this.setPreferredSize(dimension);
+			
+			this.cx = this.cx + this.dx;
+			this.cy = this.cy + this.dy;
+		}
+		
 		this.add(p, 0);
-		this.cx = this.cx + this.dx;
-		this.cy = this.cy + this.dy;
 		p.setLocation(this.cx, this.cy);
-		p.setVisible(true);
-		this.setSize(this.getWidth()+dx, this.getHeight()+dy);
+		
+		
+		this.validate();
+		this.repaint();
 	}
 	
 	/**

@@ -9,27 +9,36 @@ public class CTasDeCartes extends TasDeCartes {
 	
 	private PTasDeCartes presentation;
 	
-	public CTasDeCartes(String arg0, Usine arg1) {
-		super(arg0, arg1);
+	public CTasDeCartes(String nom, Usine usine) {
+		super(nom, usine);
 		this.presentation = new PTasDeCartes(this);
 	}
 	
 	@Override
 	public void depiler() {
-		try {
-			CCarte c = (CCarte) this.getSommet();
-			super.depiler();
-			this.presentation.depiler(c.getPresentation());
-		} catch (Exception e) {
-			System.out.println("Erreur en dépilant : la pile est vide");
+		if (!this.isVide()) {
+			try {
+				CCarte c = (CCarte) this.getSommet();
+				super.depiler();
+				this.presentation.depiler(c.getPresentation());
+			} catch (Exception e) {
+				System.out.println("Erreur en dÃ©pilant : "+e.getMessage());
+			}
 		}
 	}
 	
 	@Override
 	public void empiler(Carte c) {
-		CCarte cc = (CCarte) c;
-		super.empiler(cc);
-		this.presentation.empiler(cc.getPresentation());
+		if (this.isEmpilable(c)) {
+			super.empiler(c);
+			try {
+				if (this.getSommet() == c) {
+					this.presentation.empiler(((CCarte) c).getPresentation());
+				}
+			} catch (Exception e) {
+				System.out.println("Erreur en empilant : "+e.getMessage());
+			}
+		}
 	}
 	
 	/**

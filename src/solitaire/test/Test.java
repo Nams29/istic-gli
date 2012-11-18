@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import solitaire.application.TasDeCartes;
 import solitaire.controle.CCarte;
 import solitaire.controle.CSabot;
 import solitaire.controle.CTasDeCartes;
@@ -24,7 +25,6 @@ import solitaire.presentation.PTasDeCartes;
  * @author engel test des diff�rents objets visuel
  */
 public class Test extends JFrame {
-	//test vianney
 	private static final long serialVersionUID = 7243944635891289052L;
 
 	public static void main(String[] args) {
@@ -37,7 +37,7 @@ public class Test extends JFrame {
 		// taille de la fen�tre
 		jt.pack(); 
 
-		// centrer la fen�tre dans l'�cran
+		// centrer la fen�tre dans l'écran
 		Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize();
 		Point origine = new Point((dimEcran.width - jt.getWidth())/2,
 				(dimEcran.height - jt.getHeight())/2);
@@ -91,8 +91,8 @@ public class Test extends JFrame {
 	/**
 	 * test des TasDeCartes
 	 * 
-	 * @param fenetre o� afficher les cartes
-	 * @param titre de la fen�tre ci-dessus
+	 * @param fenetre où afficher les cartes
+	 * @param titre de la fenêtre ci-dessus
 	 */
 	public static void testTasDeCartes(Test fenetre, String titre) {
 		fenetre.setTitle(titre);
@@ -104,9 +104,10 @@ public class Test extends JFrame {
 		PTasDeCartes pres1 = tas1.getPresentation();
 		CCarte carte = (CCarte) usine.newCarte(1, 1);
 		carte.setFaceVisible(true);
-		pres1.setDxDy(0, 15);
+		pres1.setDxDy(0, 10);
 		tas1.empiler(usine.newCarte(8, 2));
 		tas1.empiler(usine.newCarte(1, 3));
+		tas1.empiler(usine.newCarte(12, 1));
 		tas1.empiler(carte);
 		pres1.setLocation(20, 20);
 		fenetre.getContentPane().add(pres1) ;
@@ -124,11 +125,14 @@ public class Test extends JFrame {
 		tas2.empiler(carte1);
 		tas2.empiler(carte2);
 		tas2.empiler(carte3);
+		// Test depiler
+		tas2.empiler(usine.newCarte(9, 2));
+		tas2.depiler();
 		pres2.setLocation(40 + PCarte.largeur, 20);
 		fenetre.getContentPane().add(pres2) ;
 
 		// taille du conteneur
-		Dimension d = new Dimension(2 * PCarte.largeur + 70, PCarte.hauteur + 45);
+		Dimension d = new Dimension(300, 200);
 		fenetre.getContentPane().setSize(d);
 		fenetre.getContentPane().setPreferredSize(d);
 	}
@@ -137,14 +141,23 @@ public class Test extends JFrame {
 		fenetre.setTitle(titre);
 		
 		CUsine usine = new CUsine();
-		
+
 		// creation sabot
 		CSabot sabot = (CSabot) usine.newSabot("sabot", usine);
-		PSabot pSabot = sabot.getPresentation();
-		fenetre.getContentPane().add(pSabot);
+		
+		// Tas de cartes
+		TasDeCartes tas = usine.newTasDeCartes("sabot test", usine);
+		tas.empiler(usine.newCarte(11, 3));
+		tas.empiler(usine.newCarte(7, 1));
+		tas.empiler(usine.newCarte(5, 1));
+		tas.empiler(usine.newCarte(1, 4));
+		tas.empiler(usine.newCarte(9, 2));
+		sabot.setReserve(tas);
+		
+		fenetre.getContentPane().add(sabot.getPresentation());
 		
 		
-				
+		
 		// taille du conteneur
 		Dimension d = new Dimension(2 * PCarte.largeur + 70, PCarte.hauteur + 45);
 		fenetre.getContentPane().setSize(d);

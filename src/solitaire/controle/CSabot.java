@@ -5,28 +5,37 @@ import solitaire.application.Usine;
 import solitaire.presentation.PSabot;
 
 public class CSabot extends Sabot {
-	
-	private static String sabot_cache = "cache";
-	private static String sabot_visible = "visible";
-	
+		
 	private PSabot presentation;
-	private CTasDeCartes cache;
-	private CTasDeCartes visible;
+	
+	private CTasDeCartes hiddenDeck;
+	private CTasDeCartes visibleDeck;
 	
 	public CSabot(String nom, Usine usine) {
 		super(nom, usine);
-		this.cache = (CTasDeCartes) ((CUsine)usine).newTasDeCartes(sabot_cache, usine);
-		this.visible = (CTasDeCartes) ((CUsine)usine).newTasDeCartes(sabot_visible, usine);
-		this.presentation = new PSabot(this, ((CTasDeCartes)cache).getPresentation(), 
-				((CTasDeCartes)visible).getPresentation());
+		this.hiddenDeck = (CTasDeCartes) this.visibles;
+		this.visibleDeck = (CTasDeCartes) this.hiddenDeck;
+		this.presentation = new PSabot(this, hiddenDeck.getPresentation(), visibleDeck.getPresentation());
 	}
 	
 	/**
-	 * Return the presentation
 	 * @return the presentation
 	 */
 	public PSabot getPresentation() {
 		return this.presentation;
 	}
-	
+
+	/**
+	 * @return the hiddenDeck
+	 */
+	public CTasDeCartes getHiddenDeck() {
+		return hiddenDeck;
+	}
+
+	/**
+	 * @return the visibleDeck
+	 */
+	public CTasDeCartes getVisibleDeck() {
+		return visibleDeck;
+	}
 }
