@@ -4,15 +4,15 @@ import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasAlterne;
+import solitaire.presentation.PTasDeCartes;
 
-public class CTasAlterne extends TasDeCartesAlternees {
+public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	
 	private PTasAlterne presentation; 
 	
 	public CTasAlterne(String nom, Usine usine) {
 		super(nom, usine);
 		this.presentation = new PTasAlterne(this);
-		
 	}
 	
 	/**
@@ -24,10 +24,10 @@ public class CTasAlterne extends TasDeCartesAlternees {
 	
 	@Override
 	public void empiler(Carte c) {
-		if (this.isEmpilable(c))  {
+		//if (this.isEmpilable(c))  {
 			super.empiler(c);
 			this.presentation.empiler(((CCarte)c).getPresentation());
-		}
+		//}
 	}
 	
 	@Override

@@ -5,7 +5,7 @@ import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasDeCartes;
 
-public class CTasDeCartes extends TasDeCartes {
+public class CTasDeCartes extends TasDeCartes implements ICTas {
 	
 	private PTasDeCartes presentation;
 	

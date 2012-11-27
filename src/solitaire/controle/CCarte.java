@@ -33,4 +33,13 @@ public class CCarte extends Carte {
 	public PCarte getPresentation() {
 		return this.presentation;
 	}
+	
+	/**
+	 * Return the color corresponding the index
+	 * @param i the index
+	 * @return the color
+	 */
+	public static String getCouleur(int i) {
+		return couleurs[i];
+	}
 }

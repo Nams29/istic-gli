@@ -1,8 +1,13 @@
 package solitaire.presentation ;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import solitaire.controle.CColonne;
@@ -19,10 +24,12 @@ public class PColonne extends JPanel {
 	private static int DX = 0;
 	private static int DY = 30;
 	
-	public PColonne(CColonne cColonne, PTasDeCartes tas1, PTasAlterne tas2) { 
+	public PColonne(CColonne cColonne, PTasDeCartes tas1, PTasAlterne tas2) {
 		this.controleur = cColonne;
 		this.hiddenDeck = tas1;
 		this.alternateDeck = tas2;
+		this.alternateDeck.setBackground(Color.PINK);
+		this.alternateDeck.setOpaque(false);
 		
 		this.initLayout();
 	}
@@ -38,13 +45,15 @@ public class PColonne extends JPanel {
 
 		this.add(alternateDeck);
 		this.add(hiddenDeck);
+		
+		// Listener
+		this.hiddenDeck.addMouseListener(new RetournerCarteListener());
 	}
 	
 	/**
 	 * Set the size of the hidden deck
-	 * @param nbCartes the cards on the hidden deck
 	 */
-	public void setSize() {
+	public void c2pFlipCard() {
 		int nbHidden = controleur.getNombreCache();
 		int nbVisible = controleur.getNombre();
 		
@@ -57,8 +66,39 @@ public class PColonne extends JPanel {
 		Dimension dimension = new Dimension(x, y);
 		this.setSize(dimension);
 		this.setPreferredSize(dimension);
+		
+		// TODO : faire une methode dans ptasdecarte (activercurseur)
+		/*if (nbVisible == 0) {
+			this.hiddenDeck.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+		else {
+			this.hiddenDeck.setCursor(null);
+		}*/
 	}
 	
-	
+	/**
+	 * Class RetournerCarteListener
+	 * Listen the clicks on the hidden deck
+	 */
+	private class RetournerCarteListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			controleur.p2cHiddenDeckClick();
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) { }
+
+		@Override
+		public void mouseReleased(MouseEvent e) { }
+
+		@Override
+		public void mouseEntered(MouseEvent e) { }
+
+		@Override
+		public void mouseExited(MouseEvent e) { }
+		
+	}
 		
 } 

@@ -1,7 +1,10 @@
 package solitaire.presentation ;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -16,6 +19,9 @@ public class PSabot extends JPanel {
 	private PTasDeCartes hiddenDeck;
 	private PTasDeCartes visibleDeck;
 	
+	private final int INSET_X = 10;
+	private final int INSET_Y = 0;
+	
 	public PSabot(CSabot cSabot, PTasDeCartes hiddenDeck, PTasDeCartes visibleDeck) {
 		this.controleur = cSabot;
 		this.hiddenDeck = hiddenDeck;
@@ -26,7 +32,7 @@ public class PSabot extends JPanel {
 		
 		// Dimension
 		this.setBackground(Color.GRAY);
-		this.setSize(2*PCarte.largeur+40, PCarte.hauteur+10);
+		this.setSize(2*PCarte.largeur+INSET_X, PCarte.hauteur+INSET_Y);
 		this.setPreferredSize(getSize());
 	}
 	
@@ -39,9 +45,47 @@ public class PSabot extends JPanel {
 		this.visibleDeck.setDxDy(15, 0);
 		
 		// Affichage
-		this.setLayout(new FlowLayout());
-		this.add(hiddenDeck);
-		this.add(visibleDeck);
+		this.setLayout(new BorderLayout());
+		this.add(hiddenDeck, BorderLayout.WEST);
+		this.add(visibleDeck, BorderLayout.EAST);
+		
+		// Listener
+		this.hiddenDeck.addMouseListener(new RetournerCarteListener());
+	}
+	
+	/**
+	 * Set the size of the component
+	 */
+	public void setSize() {
+		Dimension dim = new Dimension(
+				this.hiddenDeck.getWidth()+this.visibleDeck.getWidth()+INSET_X, 
+				this.getHeight());
+		this.setSize(dim);
+	}
+	
+	/**
+	 * Class RetournerCarteListener
+	 * Listen the clicks on the hidden deck
+	 */
+	private class RetournerCarteListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			controleur.p2cHiddenDeckClick();
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) { }
+
+		@Override
+		public void mouseReleased(MouseEvent e) { }
+
+		@Override
+		public void mouseEntered(MouseEvent e) { }
+
+		@Override
+		public void mouseExited(MouseEvent e) { }
+		
 	}
 	
 } 

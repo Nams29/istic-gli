@@ -29,6 +29,7 @@ public class CSabot extends Sabot {
 	public void retourner() throws Exception {
 		if (isRetournable()) {
 			super.retourner();
+			this.presentation.setSize();
 		}
 	}
 
@@ -36,6 +37,23 @@ public class CSabot extends Sabot {
 	public void retournerCarte() throws Exception {
 		if (isCarteRetournable()) {
 			super.retournerCarte();
+			this.presentation.setSize();
+		}
+	}
+	
+	/**
+	 * React to a click on the hidden deck
+	 */
+	public void p2cHiddenDeckClick() {
+		try {
+			if (isRetournable()) {
+				this.retourner();
+			}
+			else {
+				this.retournerCarte();
+			}
+		} catch (Exception e) {
+			System.out.println("Erreur en retournant une carte : "+e.getMessage());
 		}
 	}
 	

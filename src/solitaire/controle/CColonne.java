@@ -5,6 +5,7 @@ import solitaire.application.Colonne;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
+import solitaire.presentation.PTasAlterne;
 
 public class CColonne extends Colonne {
 	
@@ -17,7 +18,8 @@ public class CColonne extends Colonne {
 		super(nom, usine);
 		this.hiddenDeck = (CTasDeCartes) this.cachees;
 		this.alternateDeck = (CTasAlterne) this.visibles;
-		this.presentation = new PColonne(this, this.hiddenDeck.getPresentation(), this.alternateDeck.getPresentation());
+		this.presentation = new PColonne(this, hiddenDeck.getPresentation(), 
+				((PTasAlterne) this.alternateDeck.getPresentation()));
 	}
 	
 	@Override
@@ -25,6 +27,7 @@ public class CColonne extends Colonne {
 		if (isCarteRetournable()) {
 			try {
 				super.retournerCarte();
+				this.presentation.c2pFlipCard();
 			} catch (Exception e) {
 				System.out.println("Erreur en retournant une carte : "+e.getMessage());
 			}
@@ -66,7 +69,14 @@ public class CColonne extends Colonne {
 	@Override
 	public void setReserve(Tas tas) {
 		super.setReserve(tas);
-		this.presentation.setSize();
+		this.presentation.c2pFlipCard();
+	}
+	
+	/**
+	 * React to a click on the hidden deck
+	 */
+	public void p2cHiddenDeckClick() {
+		this.retournerCarte();
 	}
 	
 	/**

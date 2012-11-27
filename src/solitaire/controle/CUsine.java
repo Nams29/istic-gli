@@ -17,6 +17,11 @@ public class CUsine extends Usine {
 	public TasDeCartes newTasDeCartes(String nom, Usine usine) {
 		return new CTasDeCartes(nom, usine);
 	}
+
+	@Override
+	public DoubleTas newDoubleTas(Tas cachees, Tas visibles) {
+		return super.newDoubleTas(cachees, visibles);
+	}
 	
 	@Override
 	public Sabot newSabot(String nom, Usine usine) {
@@ -29,7 +34,17 @@ public class CUsine extends Usine {
 	}
 	
 	@Override
+	public TasDeCartesColorees newTasDeCartesColorees(String nom, int couleur, Usine usine) {
+		return new CTasColore(nom, couleur, usine);
+	}
+	
+	@Override
 	public Colonne newColonne(String nom, Usine usine) {
 		return new CColonne(nom, usine);
+	}
+
+	@Override
+	public Solitaire newSolitaire(String nom, Usine usine) {
+		return new CSolitaire(nom, usine);
 	}
 }

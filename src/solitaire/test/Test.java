@@ -23,7 +23,7 @@ import solitaire.presentation.PCarte;
 import solitaire.presentation.PTasDeCartes;
 
 /**
- * @author engel test des diff�rents objets visuel
+ * @author engel test des différents objets visuel
  */
 public class Test extends JFrame {
 	private static final long serialVersionUID = 7243944635891289052L;
@@ -37,10 +37,10 @@ public class Test extends JFrame {
 		//testTasAlterne(jt, "Test TasAlterne");
 		testColonne(jt, "Test Colonne");
 		
-		// taille de la fen�tre
+		// taille de la fenetre
 		jt.pack(); 
 
-		// centrer la fen�tre dans l'écran
+		// centrer la fenetre dans l'écran
 		Dimension dimEcran = Toolkit.getDefaultToolkit().getScreenSize();
 		Point origine = new Point((dimEcran.width - jt.getWidth())/2,
 				(dimEcran.height - jt.getHeight())/2);
@@ -63,8 +63,8 @@ public class Test extends JFrame {
 	/**
 	 * test des Cartes
 	 * 
-	 * @param fenetre o� afficher les cartes
-	 * @param titre de la fen�tre ci-dessus
+	 * @param fenetre ou afficher les cartes
+	 * @param titre de la fenetre ci-dessus
 	 */
 	public static void testCarte(Test fenetre, String titre) {
 		fenetre.setTitle(titre);
@@ -172,6 +172,7 @@ public class Test extends JFrame {
 		
 		// Creation tas alterné
 		CTasAlterne tasAlt = (CTasAlterne) usine.newTasDeCartesAlternees("tas alterné test", usine);
+		tasAlt.getPresentation().setDxDy(0, 30);
 		
 		// Cartes
 		tasAlt.empiler(usine.newCarte(13, 1));
@@ -202,9 +203,7 @@ public class Test extends JFrame {
 			tas1.empiler(usine.newCarte(12, 1));
 			tas1.empiler(usine.newCarte(7, 1));
 		col.setReserve(tas1);
-		
-		//col.retournerCarte();
-		
+				
 		fenetre.getContentPane().add(col.getPresentation());
 		
 		// taille du conteneur
