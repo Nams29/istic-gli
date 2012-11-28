@@ -38,7 +38,8 @@ public class PTasDeCartes extends JPanel {
 		
 		// Layout
 		this.setLayout(null);
-		this.setOpaque(false);
+		//this.setOpaque(false);
+		this.setBackground(PSolitaire.bg_color_light);
 	}
 	
 	/**

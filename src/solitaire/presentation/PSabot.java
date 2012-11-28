@@ -36,7 +36,6 @@ public class PSabot extends JPanel {
 	 * Initiate graphic elements
 	 */
 	private void initLayout() {
-		
 		// Affichage
 		this.setLayout(new BorderLayout());
 		this.setOpaque(false);
@@ -45,6 +44,8 @@ public class PSabot extends JPanel {
 		// Tas de cartes
 		this.hiddenDeck.setDxDy(0, 0);
 		this.visibleDeck.setDxDy(15, 0);
+		//this.hiddenDeck.setBackground(PSolitaire.bg_color_light);
+		//this.hiddenDeck.setOpaque(true);
 		this.add(hiddenDeck, BorderLayout.WEST);
 		this.add(visibleDeck, BorderLayout.EAST);
 		

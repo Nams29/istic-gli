@@ -20,7 +20,8 @@ public class PSolitaire extends JPanel {
 	private JPanel couleursPanel;
 	private JPanel colonnesPanel;
 	
-	private Color bg_color = new Color(0, 110, 24);
+	public static Color bg_color = new Color(0, 110, 24);
+	public static Color bg_color_light = new Color(70, 150, 70);
 	
 	public PSolitaire(CSolitaire cSolitaire) {
 		this.controleur = cSolitaire;

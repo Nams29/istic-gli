@@ -59,6 +59,7 @@ public class CSolitaire extends Solitaire {
 		JFrame frame = new JFrame("Test CSolitaire");
 		frame.getContentPane().add(solitaire.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		Dimension dim = new Dimension(600, 600);
 		frame.setMinimumSize(dim);
 		frame.setSize(dim);
