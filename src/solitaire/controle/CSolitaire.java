@@ -15,6 +15,8 @@ import solitaire.presentation.PTasColore;
 public class CSolitaire extends Solitaire {
 
 	private PSolitaire presentation;
+	
+	public static int GAME_MODE = 3;
 
 	public CSolitaire(String nom, Usine usine) {
 		super (nom, usine);

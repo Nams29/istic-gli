@@ -50,7 +50,9 @@ public class CSabot extends Sabot {
 				this.retourner();
 			}
 			else {
-				this.retournerCarte();
+				for (int i=0; i<CSolitaire.GAME_MODE; i++) {
+					this.retournerCarte();
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("Erreur en retournant une carte : "+e.getMessage());

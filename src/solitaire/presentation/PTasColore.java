@@ -2,7 +2,6 @@ package solitaire.presentation;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -38,7 +37,7 @@ public class PTasColore extends PTasDeCartes {
 	    setMaximumSize(size);
 	    setSize(size);
 		
-		this.setLayout(new GridLayout(1, 1));
+		this.setLayout(null);
 	}
 	
 	@Override
