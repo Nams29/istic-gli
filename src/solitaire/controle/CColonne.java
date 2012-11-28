@@ -1,11 +1,16 @@
 package solitaire.controle;
 
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
 import solitaire.presentation.PTasAlterne;
+import solitaire.presentation.PTasDeCartes;
 
 public class CColonne extends Colonne {
 	
@@ -106,5 +111,35 @@ public class CColonne extends Colonne {
 	 */
 	public int getNombreCache() {
 		return hiddenDeck.getNombre();
+	}
+	
+	/**
+	 * TEST 
+	 */
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Test Tas De Carte Alternées");
+
+		CUsine usine = new CUsine();
+
+		// Creation colonne
+		CColonne col = (CColonne) usine.newColonne("colonne test", usine);
+			CTasDeCartes tas1 = (CTasDeCartes) usine.newTasDeCartes("caché", usine);
+			PTasDeCartes pres1 = tas1.getPresentation();
+			pres1.setDxDy(0, 10);
+			tas1.empiler(usine.newCarte(8, 2));
+			tas1.empiler(usine.newCarte(1, 3));
+			tas1.empiler(usine.newCarte(12, 1));
+			tas1.empiler(usine.newCarte(7, 1));
+		col.setReserve(tas1);
+				
+		frame.getContentPane().add(col.getPresentation());
+		
+		// taille du conteneur
+		Dimension d = new Dimension(200, 300);
+		frame.setSize(d);
+		frame.setPreferredSize(d);
+		
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

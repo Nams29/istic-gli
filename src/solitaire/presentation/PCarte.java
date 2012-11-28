@@ -8,13 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Composant Présentation d'une carte
+ * Composant Prï¿½sentation d'une carte
  */
 public class PCarte extends JPanel {
 
     private static final long serialVersionUID = 8720121499899036334L;
     
-	//protected CCarte controle ;		// contrôleur associé
+	//protected CCarte controle ;		// contrï¿½leur associï¿½
     protected JLabel face, dos ;
     protected ImageIcon icone ;			// image de la face
     protected static ImageIcon iconeDos;	// image du dos
@@ -43,7 +43,7 @@ public class PCarte extends JPanel {
 
 	// le JPanel
 	setLayout (null) ;
-	setBackground (Color.yellow) ;
+	setBackground (Color.WHITE) ;
 	setOpaque (true);
 	setSize (face.getSize ()) ;
 	setPreferredSize (getSize ()) ;
@@ -51,7 +51,7 @@ public class PCarte extends JPanel {
     } // constructeur
 
     /**
-     * changer la visibilité de la carte
+     * changer la visibilitï¿½ de la carte
      * @param faceVisible : vrai si la face est visible, faux sinon
      */
     public void setFaceVisible (boolean faceVisible) {

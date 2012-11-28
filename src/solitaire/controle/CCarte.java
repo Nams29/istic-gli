@@ -1,5 +1,10 @@
 package solitaire.controle;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+
 import solitaire.application.Carte;
 import solitaire.presentation.PCarte;
 
@@ -41,5 +46,34 @@ public class CCarte extends Carte {
 	 */
 	public static String getCouleur(int i) {
 		return couleurs[i];
+	}
+	
+	/**
+	 * TEST 
+	 */
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Test Carte");
+		frame.getContentPane().setLayout(new GridLayout(1, 2));
+		
+		CUsine usine = new CUsine();
+		
+		// une carte visible
+		CCarte carte1 = (CCarte) usine.newCarte(7, 4);
+		PCarte pres1 = carte1.getPresentation();
+		carte1.setFaceVisible(true);
+		frame.getContentPane().add(pres1) ;
+
+		// une carte cachée
+		CCarte carte2 = (CCarte) usine.newCarte(1, 1);
+		PCarte pres2 = carte2.getPresentation();
+		carte2.setFaceVisible(false);
+		frame.getContentPane().add(pres2) ;
+
+		// taille du conteneur
+		Dimension d = new Dimension(2 * PCarte.largeur + 40, PCarte.hauteur + 40);
+		frame.setSize(d);
+		
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
