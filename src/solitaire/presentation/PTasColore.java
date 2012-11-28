@@ -1,10 +1,11 @@
 package solitaire.presentation;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import solitaire.controle.CCarte;
 import solitaire.controle.CTasColore;
@@ -14,7 +15,7 @@ public class PTasColore extends PTasDeCartes {
 
 	private static final long serialVersionUID = 3620161955979902278L;
 
-	private ImageIcon image;
+	private Image image;
 
 	public PTasColore(ICTas c, int couleur) {
 		super(c);
@@ -22,13 +23,14 @@ public class PTasColore extends PTasDeCartes {
 
 		this.initLayout(couleur);
 	}
-
-	private void initLayout(int couleur) {
-		String chaine = "cartesCSHD/0"+CCarte.getCouleur(couleur-1)+".gif";
-		image = new ImageIcon(ClassLoader.getSystemResource(chaine));
-		
-		JLabel fond = new JLabel(image);
-		this.add(fond);
+	
+	/**
+	 * Initialize graphic components
+	 * @param color the color of the deck
+	 */
+	private void initLayout(int color) {
+		String chaine = "res/0"+CCarte.getCouleur(color-1)+".gif";
+		image = new ImageIcon(chaine).getImage();
 		
 		Dimension size = new Dimension(PCarte.largeur, PCarte.hauteur);
 	    setPreferredSize(size);
@@ -36,7 +38,12 @@ public class PTasColore extends PTasDeCartes {
 	    setMaximumSize(size);
 	    setSize(size);
 		
-		this.setLayout(new GridLayout(1, 0));
+		this.setLayout(new GridLayout(1, 1));
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+	     g.drawImage(image, 0, 0, null);
 	}
 
 }

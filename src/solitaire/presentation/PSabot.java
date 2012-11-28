@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import solitaire.controle.CSabot;
 
@@ -18,7 +19,7 @@ public class PSabot extends JPanel {
 	private PTasDeCartes hiddenDeck;
 	private PTasDeCartes visibleDeck;
 	
-	private final int INSET_X = 15;
+	private final int INSET_X = 20;
 	private final int INSET_Y = 0;
 	
 	public PSabot(CSabot cSabot, PTasDeCartes hiddenDeck, PTasDeCartes visibleDeck) {
@@ -28,25 +29,29 @@ public class PSabot extends JPanel {
 		
 		// Layout
 		this.initLayout();
-		this.setOpaque(false);
 		
-		// Dimension
-		this.setSize(2*PCarte.largeur+INSET_X, PCarte.hauteur+INSET_Y);
-		this.setPreferredSize(getSize());
 	}
 	
 	/**
 	 * Initiate graphic elements
 	 */
 	private void initLayout() {
-		// Tas de cartes
-		this.hiddenDeck.setDxDy(0, 0);
-		this.visibleDeck.setDxDy(15, 0);
 		
 		// Affichage
 		this.setLayout(new BorderLayout());
+		this.setOpaque(false);
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		// Tas de cartes
+		this.hiddenDeck.setDxDy(0, 0);
+		this.visibleDeck.setDxDy(15, 0);
 		this.add(hiddenDeck, BorderLayout.WEST);
 		this.add(visibleDeck, BorderLayout.EAST);
+		
+		// Dimension
+		Dimension dim = new Dimension (2*PCarte.largeur+INSET_X, PCarte.hauteur+INSET_Y);
+		this.setSize(dim);
+		this.setPreferredSize(dim);
 		
 		// Listener
 		this.hiddenDeck.addMouseListener(new RetournerCarteListener());
