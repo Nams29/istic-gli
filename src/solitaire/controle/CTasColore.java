@@ -2,8 +2,6 @@ package solitaire.controle;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -12,7 +10,6 @@ import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasColore;
-import solitaire.presentation.PTasDeCartes;
 
 public class CTasColore extends TasDeCartesColorees implements ICTas {
 	

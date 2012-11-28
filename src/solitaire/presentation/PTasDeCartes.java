@@ -1,6 +1,5 @@
 package solitaire.presentation;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
@@ -21,6 +20,7 @@ public class PTasDeCartes extends JPanel {
 
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
+	private Dimension dim = new Dimension(PCarte.largeur, PCarte.hauteur);
 
 	public PTasDeCartes(ICTas c) {
 		this.controleur = c;
@@ -32,9 +32,13 @@ public class PTasDeCartes extends JPanel {
 	 * Initiate graphic elements
 	 */
 	private void initLayout() {
-		this.setBackground(Color.LIGHT_GRAY);
-
+		// Taille
+		this.setSize(dim);
+		this.setPreferredSize(dim);
+		
+		// Layout
 		this.setLayout(null);
+		this.setOpaque(false);
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package solitaire.presentation ;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,7 +18,7 @@ public class PSabot extends JPanel {
 	private PTasDeCartes hiddenDeck;
 	private PTasDeCartes visibleDeck;
 	
-	private final int INSET_X = 10;
+	private final int INSET_X = 15;
 	private final int INSET_Y = 0;
 	
 	public PSabot(CSabot cSabot, PTasDeCartes hiddenDeck, PTasDeCartes visibleDeck) {
@@ -29,9 +28,9 @@ public class PSabot extends JPanel {
 		
 		// Layout
 		this.initLayout();
+		this.setOpaque(false);
 		
 		// Dimension
-		this.setBackground(Color.GRAY);
 		this.setSize(2*PCarte.largeur+INSET_X, PCarte.hauteur+INSET_Y);
 		this.setPreferredSize(getSize());
 	}
@@ -61,6 +60,7 @@ public class PSabot extends JPanel {
 				this.hiddenDeck.getWidth()+this.visibleDeck.getWidth()+INSET_X, 
 				this.getHeight());
 		this.setSize(dim);
+		this.setPreferredSize(dim);
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package solitaire.controle;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import solitaire.application.Colonne;
@@ -55,8 +57,9 @@ public class CSolitaire extends Solitaire {
 		JFrame frame = new JFrame("Test CSolitaire");
 		frame.getContentPane().add(solitaire.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 600);
-		frame.setResizable(false);
+		Dimension dim = new Dimension(600, 600);
+		frame.setMinimumSize(dim);
+		frame.setSize(dim);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(frame.getParent());
 

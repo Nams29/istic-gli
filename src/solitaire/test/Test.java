@@ -33,9 +33,9 @@ public class Test extends JFrame {
 
 		//testCarte(jt, "Test Carte");
 		//testTasDeCartes(jt, "Test TasDeCartes");
-		//testSabot(jt, "Test Sabot");
+		testSabot(jt, "Test Sabot");
 		//testTasAlterne(jt, "Test TasAlterne");
-		testColonne(jt, "Test Colonne");
+		//testColonne(jt, "Test Colonne");
 		
 		// taille de la fenetre
 		jt.pack(); 

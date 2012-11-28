@@ -1,13 +1,10 @@
 package solitaire.presentation ;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import solitaire.controle.CColonne;
@@ -20,9 +17,11 @@ public class PColonne extends JPanel {
 	
 	private PTasDeCartes hiddenDeck;
 	private PTasAlterne alternateDeck;
-	
-	private static int DX = 0;
-	private static int DY = 30;
+
+	private static int DX_hidden = 0;
+	private static int DY_hidden = 15;
+	private static int DX_visible = 0;
+	private static int DY_visible = 30;
 	
 	public PColonne(CColonne cColonne, PTasDeCartes tas1, PTasAlterne tas2) {
 		this.controleur = cColonne;
@@ -38,10 +37,11 @@ public class PColonne extends JPanel {
 	 * Initiate graphic elements
 	 */
 	private void initLayout() {
-		this.hiddenDeck.setDxDy(DX, DY);
-		this.alternateDeck.setDxDy(DX, DY);
+		this.hiddenDeck.setDxDy(DX_hidden, DY_hidden);
+		this.alternateDeck.setDxDy(DX_visible, DY_visible);
 		
 		this.setLayout(null);
+		this.setOpaque(false);
 
 		this.add(alternateDeck);
 		this.add(hiddenDeck);
@@ -58,22 +58,14 @@ public class PColonne extends JPanel {
 		int nbVisible = controleur.getNombre();
 		
 		// Decalage des cartes visibles
-		this.alternateDeck.setLocation(nbHidden*DX, nbHidden*DY);
+		this.alternateDeck.setLocation(nbHidden*DX_hidden, nbHidden*DY_hidden);
 		
 		// Taille colonne
-		int x = nbHidden*DX + nbVisible*DX - DX + PCarte.largeur;
-		int y = nbHidden*DY + nbVisible*DY - DY + PCarte.hauteur;
+		int x = nbHidden*DX_hidden + ((nbVisible-1)*DX_visible) + PCarte.largeur;
+		int y = nbHidden*DY_hidden + ((nbVisible-1)*DY_visible) + PCarte.hauteur;
 		Dimension dimension = new Dimension(x, y);
 		this.setSize(dimension);
 		this.setPreferredSize(dimension);
-		
-		// TODO : faire une methode dans ptasdecarte (activercurseur)
-		/*if (nbVisible == 0) {
-			this.hiddenDeck.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		}
-		else {
-			this.hiddenDeck.setCursor(null);
-		}*/
 	}
 	
 	/**

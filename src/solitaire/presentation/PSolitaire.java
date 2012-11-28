@@ -1,9 +1,10 @@
 package solitaire.presentation;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import solitaire.controle.CSolitaire;
@@ -12,11 +13,14 @@ public class PSolitaire extends JPanel {
 	
 	private static final long serialVersionUID = -6817459451699654006L;
 	
+	@SuppressWarnings("unused")
 	private CSolitaire controleur;
-	
-	private JPanel sabotPanel;
+
+	private JPanel northPanel;
 	private JPanel couleursPanel;
 	private JPanel colonnesPanel;
+	
+	private Color bg_color = new Color(0, 110, 24);
 	
 	public PSolitaire(CSolitaire cSolitaire) {
 		this.controleur = cSolitaire;
@@ -28,27 +32,21 @@ public class PSolitaire extends JPanel {
 	 * Initiate the graphic components
 	 */
 	private void initLayout() {
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout());
+		this.setBackground(bg_color);
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(5, 5, 5, 5);
-		gbc.anchor = GridBagConstraints.NORTH;
-		
-		this.sabotPanel = new JPanel();
-		this.add(sabotPanel, gbc);
-		
-		gbc.gridx = 1;
 		this.couleursPanel = new JPanel();
-		this.add(couleursPanel, gbc);
+		this.couleursPanel.setOpaque(false);
 		
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.fill = GridBagConstraints.BOTH;
-		this.colonnesPanel = new JPanel();
-		this.add(colonnesPanel, gbc);
+		this.northPanel = new JPanel(new BorderLayout());
+		this.northPanel.add(couleursPanel, BorderLayout.EAST);
+		this.northPanel.setOpaque(false);
+		this.add(northPanel, BorderLayout.NORTH);
+		
+		this.colonnesPanel = new JPanel(new GridLayout(1, 7));
+		this.colonnesPanel.setOpaque(false);
+		this.colonnesPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
+		this.add(colonnesPanel, BorderLayout.CENTER);
 	}
 	
 	/**
@@ -56,7 +54,7 @@ public class PSolitaire extends JPanel {
 	 * @param sabot
 	 */
 	public void setSabot(PSabot sabot) {
-		this.sabotPanel.add(sabot);
+		this.northPanel.add(sabot, BorderLayout.WEST);
 	}
 	
 	/**

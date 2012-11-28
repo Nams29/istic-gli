@@ -4,7 +4,6 @@ import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasAlterne;
-import solitaire.presentation.PTasDeCartes;
 
 public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	
