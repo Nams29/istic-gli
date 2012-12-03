@@ -15,14 +15,14 @@ import javax.swing.JPanel;
 
 import solitaire.controle.ICTas;
 
-public class PTasDeCartes extends JPanel implements Transferable {
+public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 
 	private static final long serialVersionUID = -1583784803552208119L;
 
 	protected ICTas controleur;
 	
 	private DropTarget dropTarget;
-	private DropTargetEvent dropEvent;
+	private DropTargetDropEvent dropEvent;
 	
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
@@ -54,6 +54,7 @@ public class PTasDeCartes extends JPanel implements Transferable {
 	 */
 	private void initDrag() {
 		this.dropTarget = new DropTarget(this, new TasDropTargetListener());
+		this.dropTarget.setActive(true);
 	}
 	
 	/**
@@ -108,7 +109,38 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		this.validate();
 		this.repaint();
 	}
+	
+	@Override
+	public void c2pDropOK() {
+		System.out.println("Drop ok");
+		dropEvent.dropComplete(true);
+		this.repaint();
+	}
 
+	@Override
+	public void c2pDropFailed() {
+		System.out.println("Drop pas ok");
+		this.repaint();
+	}
+
+	@Override
+	public void c2pDropPossible() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void c2pDropImpossible() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void c2pDragExit() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * Set the location of the stack
 	 * @param dx the horizontal location
@@ -117,6 +149,14 @@ public class PTasDeCartes extends JPanel implements Transferable {
 	public void setDxDy(int dx, int dy) {
 		this.dx = dx;
 		this.dy = dy;
+	}
+	
+	/**
+	 * Return the controller
+	 * @return the controller
+	 */
+	public ICTas getController() {
+		return this.controleur;
 	}
 	
 	@Override
@@ -142,10 +182,13 @@ public class PTasDeCartes extends JPanel implements Transferable {
 		
 		@Override
 		public void dragEnter(DropTargetDragEvent dtde) {
+			System.out.println("coucou");
 			Transferable transf = dtde.getTransferable();
-			
 			try {
+				
 				sourceDeck = (PTasDeCartes) transf.getTransferData(new DataFlavor(getClass(), null));
+				controleur.p2cDragEnter(sourceDeck.getController());
+				
 			} catch (UnsupportedFlavorException e) {
 				System.out.println("Erreur lors du drag and drop : "+e.getMessage());
 			} catch (IOException e) {
@@ -155,27 +198,22 @@ public class PTasDeCartes extends JPanel implements Transferable {
 
 		@Override
 		public void dragExit(DropTargetEvent dte) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void dragOver(DropTargetDragEvent dtde) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("au revoir");
+			controleur.p2cDragExit(sourceDeck.getController());
 		}
 
 		@Override
 		public void drop(DropTargetDropEvent dtde) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("chboum");
+			dropEvent = dtde;
+			controleur.p2cDrop(sourceDeck.getController());
 		}
 
 		@Override
-		public void dropActionChanged(DropTargetDragEvent dtde) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void dragOver(DropTargetDragEvent dtde) { }
+
+		@Override
+		public void dropActionChanged(DropTargetDragEvent dtde) { }
 		
 	}
 

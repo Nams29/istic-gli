@@ -40,7 +40,25 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 			this.presentation.empiler(((CCarte) c).getPresentation());
 		}
 	}
+	
+	@Override
+	public void p2cDragEnter(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void p2cDragExit(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void p2cDrop(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * @return the presentation
 	 */

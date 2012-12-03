@@ -45,6 +45,24 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			}
 		}
 	}
+
+	@Override
+	public void p2cDragEnter(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void p2cDragExit(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void p2cDrop(ICTas controller) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/**
 	 * TEST 

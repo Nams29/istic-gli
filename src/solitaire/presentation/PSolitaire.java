@@ -11,6 +11,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import solitaire.command.ExitCommand;
+import solitaire.command.NewGameCommand;
+import solitaire.command.OptionsCommand;
+import solitaire.command.ProposCommand;
 import solitaire.controle.CSolitaire;
 import solitaire.listener.CommandActionListener;
 
@@ -71,7 +74,10 @@ public class PSolitaire extends JPanel {
 		JMenuItem miPropos = new JMenuItem("À propos");
 		mHelp.add(miPropos);
 		
+		miNew.addActionListener(new CommandActionListener(new NewGameCommand(this.controleur)));
+		miOptions.addActionListener(new CommandActionListener(new OptionsCommand(this.controleur)));
 		miExit.addActionListener(new CommandActionListener(new ExitCommand(this.controleur)));
+		miPropos.addActionListener(new CommandActionListener(new ProposCommand(this.controleur)));
 		
 		mFichier.add(miNew);
 		mFichier.add(miOptions);

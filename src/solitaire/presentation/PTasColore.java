@@ -10,7 +10,7 @@ import solitaire.controle.CCarte;
 import solitaire.controle.CTasColore;
 import solitaire.controle.ICTas;
 
-public class PTasColore extends PTasDeCartes {
+public class PTasColore extends PTasDeCartes implements IPDropTarget {
 
 	private static final long serialVersionUID = 3620161955979902278L;
 
@@ -38,6 +38,31 @@ public class PTasColore extends PTasDeCartes {
 	    setSize(size);
 		
 		this.setLayout(null);
+	}
+	
+	@Override
+	public void c2pDropOK() {
+		super.c2pDropOK();
+	}
+
+	@Override
+	public void c2pDropFailed() {
+		super.c2pDropFailed();
+	}
+
+	@Override
+	public void c2pDropPossible() {
+		super.c2pDropPossible();
+	}
+
+	@Override
+	public void c2pDropImpossible() {
+		super.c2pDropImpossible();
+	}
+
+	@Override
+	public void c2pDragExit() {
+		super.c2pDragExit();
 	}
 	
 	@Override
