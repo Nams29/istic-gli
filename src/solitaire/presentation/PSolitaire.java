@@ -10,13 +10,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import solitaire.command.Command;
+import solitaire.command.ExitCommand;
 import solitaire.controle.CSolitaire;
+import solitaire.listener.CommandActionListener;
 
 public class PSolitaire extends JPanel {
 	
 	private static final long serialVersionUID = -6817459451699654006L;
 	
-	@SuppressWarnings("unused")
 	private CSolitaire controleur;
 
 	private JMenuBar menuBar;
@@ -69,6 +71,8 @@ public class PSolitaire extends JPanel {
 		JMenu mHelp = new JMenu("?");
 		JMenuItem miPropos = new JMenuItem("À propos");
 		mHelp.add(miPropos);
+		
+		miExit.addActionListener(new CommandActionListener(new ExitCommand(this.controleur)));
 		
 		mFichier.add(miNew);
 		mFichier.add(miOptions);

@@ -39,8 +39,14 @@ public class CSolitaire extends Solitaire {
 			this.presentation.addColonne(((CColonne) c).getPresentation());
 		}
 	}
-
-
+	
+	/**
+	 * Exit the game
+	 */
+	public void exit() {
+		System.exit(0);
+	}
+	
 	/**
 	 * @return the presentation
 	 */
