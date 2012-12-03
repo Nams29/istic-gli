@@ -60,6 +60,8 @@ public class CSolitaire extends Solitaire {
 		frame.getContentPane().add(solitaire.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		frame.setJMenuBar(solitaire.getPresentation().getMenuBar());
+		
 		Dimension dim = new Dimension(600, 600);
 		frame.setMinimumSize(dim);
 		frame.setSize(dim);

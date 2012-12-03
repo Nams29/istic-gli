@@ -1,23 +1,29 @@
 package solitaire.presentation;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import solitaire.application.Carte;
-import solitaire.controle.CCarte;
-import solitaire.controle.CTasDeCartes;
 import solitaire.controle.ICTas;
 
-public class PTasDeCartes extends JPanel {
+public class PTasDeCartes extends JPanel implements Transferable {
 
 	private static final long serialVersionUID = -1583784803552208119L;
 
 	protected ICTas controleur;
-
+	
+	private DropTarget dropTarget;
+	private DropTargetEvent dropEvent;
+	
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
 	private Dimension dim = new Dimension(PCarte.largeur, PCarte.hauteur);
@@ -26,6 +32,7 @@ public class PTasDeCartes extends JPanel {
 		this.controleur = c;
 
 		this.initLayout();
+		this.initDrag();
 	}
 
 	/**
@@ -40,6 +47,13 @@ public class PTasDeCartes extends JPanel {
 		this.setLayout(null);
 		//this.setOpaque(false);
 		this.setBackground(PSolitaire.bg_color_light);
+	}
+	
+	/**
+	 * Initiate the drag and drop elements
+	 */
+	private void initDrag() {
+		this.dropTarget = new DropTarget(this, new TasDropTargetListener());
 	}
 	
 	/**
@@ -105,24 +119,62 @@ public class PTasDeCartes extends JPanel {
 		this.dy = dy;
 	}
 	
+	@Override
+	public Object getTransferData(DataFlavor df) throws UnsupportedFlavorException, IOException {
+		return this;
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		return null;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor df) {
+		return true;
+	}
+	
 	/**
-	 * Class FocusCarteListener
+	 * Class TasDropTargetListener
 	 */
-	public class FocusCarteListener implements MouseMotionListener {
-
+	private class TasDropTargetListener implements DropTargetListener {
+		private PTasDeCartes sourceDeck;
+		
 		@Override
-		public void mouseDragged(MouseEvent e) { }
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
+		public void dragEnter(DropTargetDragEvent dtde) {
+			Transferable transf = dtde.getTransferable();
+			
 			try {
-				Carte c = ((CTasDeCartes)controleur).getSommet();
-				PCarte p = ((CCarte) c).getPresentation();
-				p.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				sourceDeck = (PTasDeCartes) transf.getTransferData(new DataFlavor(getClass(), null));
+			} catch (UnsupportedFlavorException e) {
+				System.out.println("Erreur lors du drag and drop : "+e.getMessage());
+			} catch (IOException e) {
+				System.out.println("Erreur lors du drag and drop : "+e.getMessage());
 			}
+		}
+
+		@Override
+		public void dragExit(DropTargetEvent dte) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void dragOver(DropTargetDragEvent dtde) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void drop(DropTargetDropEvent dtde) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void dropActionChanged(DropTargetDragEvent dtde) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}

@@ -1,20 +1,42 @@
 package solitaire.presentation ;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Window;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.border.EmptyBorder;
 
 import solitaire.controle.CSabot;
+import solitaire.listener.MouseClickListener;
 
 public class PSabot extends JPanel {
 	
 	private static final long serialVersionUID = 5119385230762345237L;
 	
 	private CSabot controleur;
+	
+	private DragGestureEvent dragEvent;
+	private DragSource dragSource;
+	private DragSourceListener dragSourceListener;
+	private DragGestureListener dragGestureListener;
+	private DragSourceMotionListener dragSourceMotionListener;
+	
+	private JWindow dragContainer;
+	private PTasDeCartes dragDeck;
 	
 	private PTasDeCartes hiddenDeck;
 	private PTasDeCartes visibleDeck;
@@ -30,6 +52,8 @@ public class PSabot extends JPanel {
 		// Layout
 		this.initLayout();
 		
+		// Drag and drop
+		this.initDrag();
 	}
 	
 	/**
@@ -44,8 +68,6 @@ public class PSabot extends JPanel {
 		// Tas de cartes
 		this.hiddenDeck.setDxDy(0, 0);
 		this.visibleDeck.setDxDy(15, 0);
-		//this.hiddenDeck.setBackground(PSolitaire.bg_color_light);
-		//this.hiddenDeck.setOpaque(true);
 		this.add(hiddenDeck, BorderLayout.WEST);
 		this.add(visibleDeck, BorderLayout.EAST);
 		
@@ -56,6 +78,21 @@ public class PSabot extends JPanel {
 		
 		// Listener
 		this.hiddenDeck.addMouseListener(new RetournerCarteListener());
+	}
+	
+	/**
+	 * Initiate drag and drop elements
+	 */
+	private void initDrag() {
+		// Listeners
+		this.dragSourceListener = new SabotDragSourceListener();
+		this.dragGestureListener = new SabotDragGestureListener();
+		this.dragSourceMotionListener = new SabotDragSourceMotionListener();
+		
+		// Source
+		this.dragSource = new DragSource();
+		this.dragSource.createDefaultDragGestureRecognizer(visibleDeck, DnDConstants.ACTION_COPY, this.dragGestureListener);
+		this.dragSource.addDragSourceMotionListener(this.dragSourceMotionListener);
 	}
 	
 	/**
@@ -70,27 +107,89 @@ public class PSabot extends JPanel {
 	}
 	
 	/**
+	 * Called by the controler when a drag gesture is accepted
+	 * @param tas The dragged deck to display
+	 */
+	public void c2pDragGestureAccepted(PTasDeCartes tas) {
+		this.dragDeck = tas;
+		
+		// Add the deck to the drag container
+		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
+		this.dragContainer.add(tas);
+		this.dragContainer.pack();
+		
+		this.dragSource.startDrag(dragEvent, Cursor.getPredefinedCursor(Cursor.HAND_CURSOR), dragDeck, dragSourceListener);
+	}
+	
+	/**
 	 * Class RetournerCarteListener
 	 * Listen the clicks on the hidden deck
 	 */
-	private class RetournerCarteListener implements MouseListener {
+	private class RetournerCarteListener extends MouseClickListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			controleur.p2cHiddenDeckClick();
 		}
+		
+	}
+	
+	/**
+	 * Class SabotDragSourceListener
+	 * Listen the drop events on the sabot
+	 */
+	private class SabotDragSourceListener implements DragSourceListener {
 
 		@Override
-		public void mousePressed(MouseEvent e) { }
+		public void dragDropEnd(DragSourceDropEvent dsde) {
+			if (!dsde.getDropSuccess()) {
+				// Dire au controleur que le drop a échoué
+			}
+			dragContainer.remove(dragDeck);
+			dragContainer.setVisible(false);
+		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) { }
+		public void dragEnter(DragSourceDragEvent dsde) { }
 
 		@Override
-		public void mouseEntered(MouseEvent e) { }
+		public void dragExit(DragSourceEvent dse) { }
 
 		@Override
-		public void mouseExited(MouseEvent e) { }
+		public void dragOver(DragSourceDragEvent dsde) { }
+
+		@Override
+		public void dropActionChanged(DragSourceDragEvent dsde) { }
+		
+	}
+	
+	/**
+	 * Class SabotDragGestureListener
+	 * Listen the drag gestures on the sabot
+	 */
+	private class SabotDragGestureListener implements DragGestureListener {
+
+		@Override
+		public void dragGestureRecognized(DragGestureEvent dge) {
+			dragEvent = dge;
+			
+			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();
+			PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
+			controleur.p2cDragGestureRecognized(card.getControle());
+		}
+		
+	}
+	
+	/**
+	 * Class SabotDragSourceMotionListener
+	 */
+	private class SabotDragSourceMotionListener implements DragSourceMotionListener {
+
+		@Override
+		public void dragMouseMoved(DragSourceDragEvent dsde) {
+			dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()-(dragContainer.getHeight()/2));
+			dragContainer.setVisible(true);
+		}
 		
 	}
 	

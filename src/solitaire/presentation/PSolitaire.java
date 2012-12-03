@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import solitaire.controle.CSolitaire;
@@ -16,6 +19,7 @@ public class PSolitaire extends JPanel {
 	@SuppressWarnings("unused")
 	private CSolitaire controleur;
 
+	private JMenuBar menuBar;
 	private JPanel northPanel;
 	private JPanel couleursPanel;
 	private JPanel colonnesPanel;
@@ -27,6 +31,7 @@ public class PSolitaire extends JPanel {
 		this.controleur = cSolitaire;
 		
 		this.initLayout();
+		this.initMenu();
 	}
 	
 	/**
@@ -51,6 +56,29 @@ public class PSolitaire extends JPanel {
 	}
 	
 	/**
+	 * Initiate the menu
+	 */
+	private void initMenu() {
+		menuBar = new JMenuBar();
+		
+		JMenu mFichier = new JMenu("Fichier");
+		JMenuItem miNew = new JMenuItem("Nouvelle partie");
+		JMenuItem miOptions = new JMenuItem("Options");
+		JMenuItem miExit = new JMenuItem("Quitter");
+		
+		JMenu mHelp = new JMenu("?");
+		JMenuItem miPropos = new JMenuItem("À propos");
+		mHelp.add(miPropos);
+		
+		mFichier.add(miNew);
+		mFichier.add(miOptions);
+		mFichier.add(miExit);
+		
+		menuBar.add(mFichier);
+		menuBar.add(mHelp);
+	}
+	
+	/**
 	 * Set the sabot
 	 * @param sabot
 	 */
@@ -72,5 +100,12 @@ public class PSolitaire extends JPanel {
 	 */
 	public void addColonne(PColonne colonne) {
 		this.colonnesPanel.add(colonne);
+	}
+	
+	/**
+	 * @return the menu bar
+	 */
+	public JMenuBar getMenuBar() {
+		return this.menuBar;
 	}
 }

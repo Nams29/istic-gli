@@ -21,7 +21,8 @@ public class CCarte extends Carte {
 		super(Math.min(NbCartesParCouleur, Math.max(1,valeur)), 
 				Math.min(NbCouleurs, Math.max(1,couleur)));
 		this.presentation = new PCarte(valeurs[this.getValeur()-1]+
-									   couleurs[this.getCouleur()-1]);
+									   couleurs[this.getCouleur()-1],
+									   this);
 		this.presentation.setFaceVisible(false);
 	}
 	

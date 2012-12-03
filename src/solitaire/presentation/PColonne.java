@@ -3,11 +3,11 @@ package solitaire.presentation ;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import solitaire.controle.CColonne;
+import solitaire.listener.MouseClickListener;
 
 public class PColonne extends JPanel {
 	
@@ -72,24 +72,12 @@ public class PColonne extends JPanel {
 	 * Class RetournerCarteListener
 	 * Listen the clicks on the hidden deck
 	 */
-	private class RetournerCarteListener implements MouseListener {
+	private class RetournerCarteListener extends MouseClickListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			controleur.p2cHiddenDeckClick();
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) { }
-
-		@Override
-		public void mouseReleased(MouseEvent e) { }
-
-		@Override
-		public void mouseEntered(MouseEvent e) { }
-
-		@Override
-		public void mouseExited(MouseEvent e) { }
 		
 	}
 		
