@@ -73,7 +73,7 @@ public class PCarte extends JPanel {
 	 */
 	static {
 		iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartesCSHD/dos.jpg")) ;
-		largeur = iconeDos.getIconWidth () + 4;
-		hauteur = iconeDos.getIconHeight () + 4;
+		largeur = iconeDos.getIconWidth();
+		hauteur = iconeDos.getIconHeight();
 	}
 } // PCarte

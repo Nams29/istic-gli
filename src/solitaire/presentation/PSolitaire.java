@@ -10,7 +10,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import solitaire.command.Command;
 import solitaire.command.ExitCommand;
 import solitaire.controle.CSolitaire;
 import solitaire.listener.CommandActionListener;
