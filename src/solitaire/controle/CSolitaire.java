@@ -16,7 +16,7 @@ public class CSolitaire extends Solitaire {
 
 	private PSolitaire presentation;
 	
-	public static int GAME_MODE = 3;
+	public static int GAME_MODE = 1;
 
 	public CSolitaire(String nom, Usine usine) {
 		super (nom, usine);

@@ -47,20 +47,60 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	}
 
 	@Override
-	public void p2cDragEnter(ICTas controller) {
-		// TODO Auto-generated method stub
+	public void p2cDragEnter(ICTas tas) {
+		// For colored deck, one card at a time
+		if (tas.getNombre() == 1) {
+			
+			try {
+				Carte card = tas.getSommet();
+				
+				if (this.isEmpilable(card)) {
+					this.presentation.c2pDropPossible();
+				}
+				else {
+					this.presentation.c2pDropImpossible();
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else {
+			this.presentation.c2pDropImpossible();
+		}
 		
 	}
 
 	@Override
-	public void p2cDragExit(ICTas controller) {
-		// TODO Auto-generated method stub
+	public void p2cDragExit(ICTas tas) {
+		this.presentation.c2pDragExit();
 		
 	}
 
 	@Override
-	public void p2cDrop(ICTas controller) {
-		// TODO Auto-generated method stub
+	public void p2cDrop(ICTas tas) {
+		// For colored deck, one card at a time
+		if (tas.getNombre() == 1) {
+			
+			try {
+				Carte card = tas.getSommet();
+				
+				if (this.isEmpilable(card)) {
+					this.empiler(card);
+					this.presentation.c2pDropOK();
+				}
+				else {
+					this.presentation.c2pDropFailed();
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			this.presentation.c2pDropFailed();
+		}
 		
 	}
 	
