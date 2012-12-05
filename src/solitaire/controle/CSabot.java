@@ -9,7 +9,6 @@ import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 import solitaire.presentation.PCarte;
 import solitaire.presentation.PSabot;
-import solitaire.presentation.PTasDeCartes;
 
 public class CSabot extends Sabot {
 		
@@ -87,6 +86,19 @@ public class CSabot extends Sabot {
 	}
 	
 	/**
+	 * Called when the drag and drop failed
+	 * @param icTas
+	 */
+	public void p2cDragFails(ICTas icTas) {
+		try {
+			visibleDeck.empiler(icTas.getSommet());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
 	 * @return the presentation
 	 */
 	public PSabot getPresentation() {
@@ -136,16 +148,5 @@ public class CSabot extends Sabot {
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	public void p2cDragFails(ICTas icTas) {
-		// TODO Auto-generated method stub
-		try {
-			visibleDeck.empiler(icTas.getSommet());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 }
