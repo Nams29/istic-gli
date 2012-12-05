@@ -112,9 +112,12 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 		// Add the deck to the drag container
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
 		this.dragContainer.add(tas);
+
+
 		this.dragContainer.pack();
 		
 		this.dragSource.startDrag(dragEvent, Cursor.getPredefinedCursor(Cursor.HAND_CURSOR), dragDeck, dragSourceListener);
+		
 	}
 	
 	
@@ -127,6 +130,7 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
+			
 			if (!dsde.getDropSuccess()) {	
 				//(PCarte)dsde.getSource();
 				((CTasAlterne) controleur).p2cDragFails(dragDeck.getController());	
@@ -162,9 +166,15 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();
 			
 			//Vérification qu'on essaye bien de draguer une carte
+			
+			//System.out.println(deck.getComponentAt(dge.getDragOrigin()).getClass().toString());
+			
 			if(deck.getComponentAt(dge.getDragOrigin()).getClass().toString().contains("PCarte")){	
 				PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
 				((CTasAlterne) controleur).p2cDragGestureRecognized(card.getControle());
+			}
+			else{
+				System.out.println(deck.getComponentAt(dge.getDragOrigin()).getClass().toString());
 			}
 		}
 		
@@ -180,6 +190,7 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 			/* La position que ce serait bien de donner à la souris, 
 			 * mais on peut pas parce qu'il faut être à l'extérieur de la carte */
 			//dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()-(dragContainer.getHeight()/2));
+			
 			dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()+1);
 			dragContainer.setVisible(true);
 		}

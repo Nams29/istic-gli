@@ -101,7 +101,30 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			}
 		}
 		else {
-			this.presentation.c2pDropFailed();
+			
+			try {
+				if (this.isEmpilable(tas.getSommet())) {
+					
+					while(!tas.isVide()){
+						try {
+								this.empiler(tas.getSommet());
+								tas.depiler();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					this.presentation.c2pDropOK();
+
+				}
+				else{
+					this.presentation.c2pDropFailed();
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		}
 		
 	}
@@ -114,12 +137,33 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	public void p2cDragGestureRecognized(CCarte carte) {
 		try {
 			// Si on essaye bien de dépiler la carte du sommet
+			CTasDeCartes draggedDeck = new CTasDeCartes("draggedDeck", new CUsine());
 			if (carte == (CCarte) this.getSommet()) {
 				this.depiler();
 				
 				// Envoi du deck drag à la présentation
-				CTasDeCartes draggedDeck = new CTasDeCartes("draggedDeck", new CUsine());
+				
 				draggedDeck.empiler(carte);
+				this.presentation.c2pDragGestureAccepted(draggedDeck.getPresentation());
+			}
+			
+			else{				
+								
+				while(carte != (CCarte) this.getSommet()){		
+					draggedDeck.empiler((CCarte) this.getSommet());			
+					this.depiler();
+				}
+				//System.out.println(carte.getValeur());
+				
+				draggedDeck.empiler(carte);
+				this.depiler();
+				
+				
+				System.out.println("Nombre "+ draggedDeck.getNombre());
+				System.out.println(draggedDeck.toString());
+				
+				
+				
 				this.presentation.c2pDragGestureAccepted(draggedDeck.getPresentation());
 			}
 		} catch (Exception e) {
@@ -133,7 +177,12 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	 */
 	public void p2cDragFails(ICTas icTas) {
 		try {
-			this.empiler(icTas.getSommet());
+			
+			while(!icTas.isVide()){
+				this.empiler(icTas.getSommet());
+				icTas.depiler();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
