@@ -127,7 +127,6 @@ public class PSabot extends JPanel {
 	 */
 	public void c2pDragGestureAccepted(PTasDeCartes tas) {
 		this.dragDeck = tas;
-		this.dragDeck.setDropTargetActive(false);
 		
 		// Add the deck to the drag container
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
