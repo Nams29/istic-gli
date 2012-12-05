@@ -22,12 +22,20 @@ import javax.swing.border.EmptyBorder;
 import solitaire.controle.CSabot;
 import solitaire.listener.MouseClickListener;
 
+/**
+ * Class PSabot
+ * Presentation for the sabot
+ * @author Nolwenn Stephan
+ * @author Vianney Hubert
+ */
 public class PSabot extends JPanel {
 	
 	private static final long serialVersionUID = 5119385230762345237L;
 	
+	// Controller
 	private CSabot controleur;
 	
+	// Drag and Drop
 	private DragGestureEvent dragEvent;
 	private DragSource dragSource;
 	private DragSourceListener dragSourceListener;
@@ -37,12 +45,20 @@ public class PSabot extends JPanel {
 	private JWindow dragContainer;
 	private PTasDeCartes dragDeck;
 	
+	// Decks
 	private PTasDeCartes hiddenDeck;
 	private PTasDeCartes visibleDeck;
 	
+	// Display
 	private final int INSET_X = 20;
 	private final int INSET_Y = 0;
 	
+	/**
+	 * Create a new PSabot
+	 * @param cSabot The controller
+	 * @param hiddenDeck The hidden deck presentation
+	 * @param visibleDeck The visible deck presentation
+	 */
 	public PSabot(CSabot cSabot, PTasDeCartes hiddenDeck, PTasDeCartes visibleDeck) {
 		this.controleur = cSabot;
 		this.hiddenDeck = hiddenDeck;
@@ -111,6 +127,7 @@ public class PSabot extends JPanel {
 	 */
 	public void c2pDragGestureAccepted(PTasDeCartes tas) {
 		this.dragDeck = tas;
+		this.dragDeck.setDropTargetActive(false);
 		
 		// Add the deck to the drag container
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
@@ -186,7 +203,10 @@ public class PSabot extends JPanel {
 
 		@Override
 		public void dragMouseMoved(DragSourceDragEvent dsde) {
-			dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()-(dragContainer.getHeight()/2));
+			/* La position que ce serait bien de donner à la souris, 
+			 * mais on peut pas parce qu'il faut être à l'extérieur de la carte */
+			//dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()-(dragContainer.getHeight()/2));
+			dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()+1);
 			dragContainer.setVisible(true);
 		}
 		

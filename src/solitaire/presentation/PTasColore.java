@@ -21,6 +21,7 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 		this.controleur = (CTasColore) c;
 
 		this.initLayout(couleur);
+		this.initDrag();
 	}
 	
 	/**
@@ -38,6 +39,13 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 	    setSize(size);
 		
 		this.setLayout(null);
+	}
+	
+	/**
+	 * Initialize drag and drop listener
+	 */
+	private void initDrag() {
+		this.setDropTargetActive(true);
 	}
 	
 	@Override

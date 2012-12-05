@@ -43,7 +43,6 @@ public class CTasColore extends TasDeCartesColorees implements ICTas {
 
 	@Override
 	public void p2cDragEnter(ICTas tas) {
-		System.out.println("lol");
 		// For colored deck, one card at a time
 		if (tas.getNombre() == 1) {
 			
@@ -74,21 +73,17 @@ public class CTasColore extends TasDeCartesColorees implements ICTas {
 
 	@Override
 	public void p2cDrop(ICTas tas) {
-		System.out.println("CTasColore : p2cDrop");
 		// For colored deck, one card at a time
 		if (tas.getNombre() == 1) {
-			System.out.println("1 carte");
 			
 			try {
 				Carte card = tas.getSommet();
 				
 				if (this.isEmpilable(card)) {
-					System.out.println("empilable");
 					this.empiler(card);
 					this.presentation.c2pDropOK();
 				}
 				else {
-					System.out.println("pas empilable");
 					this.presentation.c2pDropFailed();
 				}
 				
