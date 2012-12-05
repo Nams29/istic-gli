@@ -9,6 +9,7 @@ import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 import solitaire.presentation.PCarte;
 import solitaire.presentation.PSabot;
+import solitaire.presentation.PTasDeCartes;
 
 public class CSabot extends Sabot {
 		
@@ -135,5 +136,16 @@ public class CSabot extends Sabot {
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public void p2cDragFails(ICTas icTas) {
+		// TODO Auto-generated method stub
+		try {
+			visibleDeck.empiler(icTas.getSommet());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

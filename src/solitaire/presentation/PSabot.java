@@ -129,6 +129,7 @@ public class PSabot extends JPanel {
 		this.dragDeck = tas;
 		this.dragDeck.setDropTargetActive(false);
 		
+		
 		// Add the deck to the drag container
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
 		this.dragContainer.add(tas);
@@ -159,7 +160,9 @@ public class PSabot extends JPanel {
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
 			if (!dsde.getDropSuccess()) {
-				// Dire au controleur que le drop a échoué
+				System.out.println("Le déposage de le carte a échoué");				
+				//(PCarte)dsde.getSource();
+				controleur.p2cDragFails(dragDeck.getController());	
 			}
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);
@@ -190,8 +193,12 @@ public class PSabot extends JPanel {
 			dragEvent = dge;
 			
 			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();
-			PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
-			controleur.p2cDragGestureRecognized(card.getControle());
+			
+			//Vérification qu'on essaye bien de draguer une carte
+			if(deck.getComponentAt(dge.getDragOrigin()).getClass().toString().contains("PCarte")){		
+				PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
+				controleur.p2cDragGestureRecognized(card.getControle());
+			}
 		}
 		
 	}
