@@ -71,6 +71,8 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		}
 		
 	}
+	
+
 
 	@Override
 	public void p2cDragExit(ICTas tas) {
@@ -100,6 +102,40 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		}
 		else {
 			this.presentation.c2pDropFailed();
+		}
+		
+	}
+	
+	
+	/**
+	 * Called when a drag gesture is done on the presentation
+	 * @param carte the controller of the card dragged
+	 */
+	public void p2cDragGestureRecognized(CCarte carte) {
+		try {
+			// Si on essaye bien de dépiler la carte du sommet
+			if (carte == (CCarte) this.getSommet()) {
+				this.depiler();
+				
+				// Envoi du deck drag à la présentation
+				CTasDeCartes draggedDeck = new CTasDeCartes("draggedDeck", new CUsine());
+				draggedDeck.empiler(carte);
+				this.presentation.c2pDragGestureAccepted(draggedDeck.getPresentation());
+			}
+		} catch (Exception e) {
+			System.out.println("Erreur lors du drag sabot : "+e.getMessage());
+		}
+	}
+	
+	/**
+	 * Called when the drag and drop failed
+	 * @param icTas
+	 */
+	public void p2cDragFails(ICTas icTas) {
+		try {
+			this.empiler(icTas.getSommet());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
