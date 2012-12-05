@@ -11,7 +11,6 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
 
@@ -21,6 +20,7 @@ import javax.swing.JWindow;
 import solitaire.controle.CCarte;
 import solitaire.controle.CTasColore;
 import solitaire.controle.ICTas;
+import solitaire.listener.DragDropEndListener;
 
 public class PTasColore extends PTasDeCartes implements IPDropTarget {
 
@@ -130,7 +130,7 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 	 * Class TasColoreDragSourceListener
 	 * Listen the drop events on the colored deck
 	 */
-	private class TasColoreDragSourceListener implements DragSourceListener {
+	private class TasColoreDragSourceListener extends DragDropEndListener {
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
@@ -141,18 +141,6 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);
 		}
-
-		@Override
-		public void dragEnter(DragSourceDragEvent dsde) { }
-
-		@Override
-		public void dragExit(DragSourceEvent dse) { }
-
-		@Override
-		public void dragOver(DragSourceDragEvent dsde) { }
-
-		@Override
-		public void dropActionChanged(DragSourceDragEvent dsde) { }
 		
 	}
 	

@@ -10,7 +10,6 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
@@ -21,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import solitaire.controle.CSabot;
 import solitaire.listener.MouseClickListener;
+import solitaire.listener.DragDropEndListener;
 
 /**
  * Class PSabot
@@ -153,7 +153,7 @@ public class PSabot extends JPanel {
 	 * Class SabotDragSourceListener
 	 * Listen the drop events on the sabot
 	 */
-	private class SabotDragSourceListener implements DragSourceListener {
+	private class SabotDragSourceListener extends DragDropEndListener {
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
@@ -164,18 +164,6 @@ public class PSabot extends JPanel {
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);
 		}
-
-		@Override
-		public void dragEnter(DragSourceDragEvent dsde) { }
-
-		@Override
-		public void dragExit(DragSourceEvent dse) { }
-
-		@Override
-		public void dragOver(DragSourceDragEvent dsde) { }
-
-		@Override
-		public void dropActionChanged(DragSourceDragEvent dsde) { }
 		
 	}
 	
