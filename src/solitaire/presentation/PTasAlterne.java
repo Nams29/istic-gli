@@ -12,9 +12,7 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
-
 import javax.swing.JWindow;
-
 import solitaire.controle.CTasAlterne;
 import solitaire.controle.ICTas;
 
@@ -108,11 +106,11 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 	public void c2pDragGestureAccepted(PTasDeCartes tas) {
 		this.dragDeck = tas;
 		this.dragDeck.setDropTargetActive(false);
-		
 		// Add the deck to the drag container
+		
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
-		this.dragContainer.add(tas);
 
+		this.dragContainer.add(tas);
 
 		this.dragContainer.pack();
 		
@@ -163,19 +161,13 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			dragEvent = dge;
 			
-			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();
-			
-			//Vérification qu'on essaye bien de draguer une carte
-			
-			//System.out.println(deck.getComponentAt(dge.getDragOrigin()).getClass().toString());
-			
+			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();			
+			//Vérification qu'on essaye bien de draguer une carte	
 			if(deck.getComponentAt(dge.getDragOrigin()).getClass().toString().contains("PCarte")){	
 				PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
 				((CTasAlterne) controleur).p2cDragGestureRecognized(card.getControle());
 			}
-			else{
-				System.out.println(deck.getComponentAt(dge.getDragOrigin()).getClass().toString());
-			}
+
 		}
 		
 	}

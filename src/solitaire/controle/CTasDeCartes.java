@@ -41,6 +41,19 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 		}
 	}
 	
+
+	
+	
+	//Permet de retourner le sous tas de carte à partir d'une carte
+	public CTasDeCartes recupererSousTas(CCarte c){
+		
+		
+		
+		return null;
+	}
+
+	
+	
 	@Override
 	public void p2cDragEnter(ICTas controller) {
 		// TODO Auto-generated method stub
@@ -101,6 +114,9 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 		tas2.empiler(carte1);
 		tas2.empiler(carte2);
 		tas2.empiler(carte3);
+		
+		tas2.empiler(tas1,2);
+		
 		// Test depiler
 		tas2.empiler(usine.newCarte(9, 2));
 		tas2.depiler();
