@@ -50,28 +50,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 
 	@Override
 	public void p2cDragEnter(ICTas tas) {
-		// For colored deck, one card at a time
-		if (tas.getNombre() == 1) {
-
-			try {
-				Carte card = tas.getSommet();
-
-				if (this.isEmpilable(card)) {
-					this.presentation.c2pDropPossible();
-				}
-				else {
-					this.presentation.c2pDropImpossible();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-		else {
-			this.presentation.c2pDropImpossible();
-		}
-
+		//todo
 	}
 
 
@@ -79,7 +58,6 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	@Override
 	public void p2cDragExit(ICTas tas) {
 		this.presentation.c2pDragExit();
-
 	}
 
 	@Override
@@ -126,7 +104,6 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 				for(int i=numCarte ;i>=1 ;i-- ){
 					this.depiler();
 				}
-				
 				this.presentation.c2pDragGestureAccepted(draggedDeck.getPresentation());
 			}
 		} catch (Exception e) {
@@ -135,7 +112,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	}
 
 	//Permet de récupéré la place de la carte dans le tas
-	
+
 	public int nombre(CCarte c){
 		int nbcarteTas=this.getNombre();
 
@@ -160,14 +137,10 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 	 */
 	public void p2cDragFails(ICTas icTas) {
 		try {
-
-			
-				this.empiler(icTas);
-
+			this.empiler(icTas);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
