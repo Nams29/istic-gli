@@ -41,23 +41,15 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 		}
 	}
 	
-
-	
-	
-	//Permet de retourner le sous tas de carte à partir d'une carte
-	public CTasDeCartes recupererSousTas(CCarte c){
-		
-		
-		
-		return null;
-	}
-
-	
 	
 	@Override
 	public void p2cDragEnter(ICTas controller) {
-		// TODO Auto-generated method stub
-		
+		if(this.isEmpilable(controller)){
+			System.out.println("OK");
+		}
+		else{
+			System.out.println("PAS ok");
+		}	
 	}
 
 	@Override

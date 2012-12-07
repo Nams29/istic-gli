@@ -50,7 +50,12 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 
 	@Override
 	public void p2cDragEnter(ICTas tas) {
-		//todo
+		if(this.isEmpilable(tas)){
+			this.presentation.c2pDropPossible();
+		}
+		else{
+			this.presentation.c2pDropImpossible();
+		}
 	}
 
 
@@ -109,6 +114,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		} catch (Exception e) {
 			System.out.println("Erreur lors du drag sabot : "+e.getMessage());
 		}
+		
 	}
 
 	//Permet de récupéré la place de la carte dans le tas

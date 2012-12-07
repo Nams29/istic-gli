@@ -16,7 +16,7 @@ import javax.swing.JWindow;
 import solitaire.controle.CTasAlterne;
 import solitaire.controle.ICTas;
 
-public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
+public class PTasAlterne extends PTasDeCartes {
 	
 	private static final long serialVersionUID = -2298012852387398285L;
 	
@@ -138,7 +138,9 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 		}
 
 		@Override
-		public void dragEnter(DragSourceDragEvent dsde) { }
+		public void dragEnter(DragSourceDragEvent dsde) {
+			//System.out.println("drag Enter");
+		}
 
 		@Override
 		public void dragExit(DragSourceEvent dse) { }
@@ -161,8 +163,10 @@ public class PTasAlterne extends PTasDeCartes implements IPDropTarget{
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			dragEvent = dge;
 			
+			System.out.println("drag");
+			
 			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();			
-			//Vérification qu'on essaye bien de draguer une carte	
+			//Vérification qu'on essaye bien de draguer une carte ou un tas	
 			if(deck.getComponentAt(dge.getDragOrigin()).getClass().toString().contains("PCarte")){	
 				PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
 				((CTasAlterne) controleur).p2cDragGestureRecognized(card.getControle());
