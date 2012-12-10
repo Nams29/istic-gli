@@ -44,12 +44,12 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 	
 	@Override
 	public void p2cDragEnter(ICTas controller) {
-		if(this.isEmpilable(controller)){
+		/*if (this.isEmpilable(controller)) {
 			System.out.println("OK");
 		}
-		else{
+		else {
 			System.out.println("PAS ok");
-		}	
+		}*/
 	}
 
 	@Override

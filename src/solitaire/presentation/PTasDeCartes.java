@@ -1,5 +1,6 @@
 package solitaire.presentation;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -28,14 +29,20 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	// Controller
 	protected ICTas controleur;
 	
+	// Feedback panels
+	protected JPanel validPanel;
+	protected JPanel errorPanel;
+	
 	// Drag and drop
-	private DropTarget dropTarget;
-	private DropTargetDropEvent dropEvent;
+	protected DropTarget dropTarget;
+	protected DropTargetDropEvent dropEvent;
 	
 	// Display
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
 	private Dimension dim = new Dimension(PCarte.largeur, PCarte.hauteur);
+	private Color cGreen = new Color(0, 200, 50, 100);
+	private Color cRed = new Color(200, 0, 50, 100);
 	
 	/**
 	 * Create a new PTasDeCarte
@@ -52,6 +59,14 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	 * Initiate graphic elements
 	 */
 	private void initLayout() {
+		// Feedback panels
+		this.validPanel = new JPanel();
+		this.errorPanel = new JPanel();
+		this.validPanel.setSize(dim);
+		this.errorPanel.setSize(dim);
+		this.validPanel.setBackground(cGreen);
+		this.errorPanel.setBackground(cRed);
+		
 		// Taille
 		this.setSize(dim);
 		this.setPreferredSize(dim);
@@ -79,6 +94,10 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 											(this.controleur.getNombre()-1)*this.dy+PCarte.hauteur);
 		this.setSize(dimension);
 		this.setPreferredSize(dimension);
+		this.validPanel.setSize(dimension);
+		this.validPanel.setPreferredSize(dimension);
+		this.errorPanel.setSize(dimension);
+		this.errorPanel.setPreferredSize(dimension);
 		
 		// Position of the new card
 		if (this.controleur.getNombre() > 1) {
@@ -106,7 +125,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	public void depiler(PCarte p) {
 		// Removing the card
 		this.remove(p);
-		
+				
 		// New size of the deck
 		Dimension dimension;
 		if (this.controleur.getNombre() > 1) {
@@ -120,6 +139,10 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 		}
 		this.setSize(dimension);
 		this.setPreferredSize(dimension);
+		this.validPanel.setSize(dimension);
+		this.validPanel.setPreferredSize(dimension);
+		this.errorPanel.setSize(dimension);
+		this.errorPanel.setPreferredSize(dimension);
 		
 		// Position of the current front card
 		this.cx = this.cx - this.dx;
@@ -133,6 +156,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	@Override
 	public void c2pDropOK() {
 		dropEvent.dropComplete(true);
+		this.repaint();
 	}
 
 	@Override
@@ -143,21 +167,16 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	@Override
 	public void c2pDropPossible() {	
 		try {		
-			if (!this.controleur.isVide()) {
-				//CCarte carte = (CCarte) this.controleur.getSommet();					
-				
-				//carte.getPresentation().setBorder(BorderFactory.createLineBorder(Color.GREEN));
-				//carte.getPresentation().repaint();
-				System.out.println("DROP POSSIBLE");
-			}
-			else {
-				System.out.println("todo");
-			}
+			//if (!this.controleur.isVide()) {
+				//this.add(validPanel);
+				//this.repaint();
+			//}
+			//else {
+			//	System.out.println("todo");
+			//}
 		} catch (Exception e) {
 			System.out.println("Impossible de récupérer la carte au sommet : "+e.getMessage());
 		}
-		
-		this.repaint();
 	}
 
 	@Override
@@ -224,6 +243,8 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 			Transferable transf = dtde.getTransferable();
 			
 			try {
+				//System.out.println("Drag enter : "+PTasDeCartes.this.getController().getNom());
+				
 				// Store the source deck of the drag
 				sourceDeck = (PTasDeCartes) transf.getTransferData(new DataFlavor(getClass(), null));
 				
@@ -238,6 +259,8 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 
 		@Override
 		public void dragExit(DropTargetEvent dte) {
+			//System.out.println("Drag exit : "+PTasDeCartes.this.getController().getNom());
+			
 			controleur.p2cDragExit(sourceDeck.getController());
 		}
 

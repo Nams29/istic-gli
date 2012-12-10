@@ -99,26 +99,48 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 	@Override
 	public void c2pDropOK() {
 		super.c2pDropOK();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 
 	@Override
 	public void c2pDropFailed() {
 		super.c2pDropFailed();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 
 	@Override
 	public void c2pDropPossible() {
 		super.c2pDropPossible();
+		
+		if (!this.getController().isVide()) {
+			this.add(validPanel, 0);
+			this.repaint();
+		}
 	}
 
 	@Override
 	public void c2pDropImpossible() {
 		super.c2pDropImpossible();
+
+		if (!this.getController().isVide()) {
+			this.add(errorPanel, 0);
+			this.repaint();
+		}
 	}
 
 	@Override
 	public void c2pDragExit() {
 		super.c2pDragExit();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 	
 	@Override

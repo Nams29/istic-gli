@@ -1,6 +1,5 @@
 package solitaire.presentation;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.dnd.DnDConstants;
@@ -12,7 +11,9 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
+
 import javax.swing.JWindow;
+
 import solitaire.controle.CTasAlterne;
 import solitaire.controle.ICTas;
 
@@ -27,32 +28,29 @@ public class PTasAlterne extends PTasDeCartes {
 	private DragGestureListener dragGestureListener;
 	private DragSourceMotionListener dragSourceMotionListener;
 	
+	// Feedback panels
 	private JWindow dragContainer;
 	private PTasDeCartes dragDeck;
-	
 	
 	public PTasAlterne(ICTas c) {
 		super(c);
 		this.controleur = (CTasAlterne) c;
 		
 		this.initLayout();
+		this.initDrag();
 	}
 	
 	/**
 	 * Initiate graphic elements
 	 */
-	private void initLayout() {
-		this.setBackground(Color.PINK);
-		
+	private void initLayout() {		
 		this.setLayout(null);
-		this.initDrag();
-		initDragSource();
 	}
 	
 	/**
-	 * Initiate drag and drop elements
+	 * Initialize drag and drop listener
 	 */
-	private void initDragSource() {
+	private void initDrag() {
 		// Listeners
 		this.dragSourceListener = new TasAlterneeDragSourceListener();
 		this.dragGestureListener = new TasAlterneeDragGestureListener();
@@ -62,39 +60,54 @@ public class PTasAlterne extends PTasDeCartes {
 		this.dragSource = new DragSource();
 		this.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, this.dragGestureListener);
 		this.dragSource.addDragSourceMotionListener(this.dragSourceMotionListener);
-	}
-	
-	
-	/**
-	 * Initialize drag and drop listener
-	 */
-	private void initDrag() {
+		
 		this.setDropTargetActive(true);
 	}
 	
 	@Override
 	public void c2pDropOK() {
 		super.c2pDropOK();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 
 	@Override
 	public void c2pDropFailed() {
 		super.c2pDropFailed();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 
 	@Override
 	public void c2pDropPossible() {
 		super.c2pDropPossible();
+		
+		if (!this.getController().isVide()) {
+			this.add(validPanel, 0);
+			this.repaint();
+		}
 	}
 
 	@Override
 	public void c2pDropImpossible() {
 		super.c2pDropImpossible();
+		if (!this.getController().isVide()) {
+			this.add(errorPanel, 0);
+			this.repaint();
+		}
 	}
 
 	@Override
 	public void c2pDragExit() {
 		super.c2pDragExit();
+		
+		this.remove(validPanel);
+		this.remove(errorPanel);
+		this.repaint();
 	}
 	
 	/**
@@ -158,8 +171,6 @@ public class PTasAlterne extends PTasDeCartes {
 		@Override
 		public void dragGestureRecognized(DragGestureEvent dge) {
 			dragEvent = dge;
-			
-			System.out.println("drag");
 			
 			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();		
 			

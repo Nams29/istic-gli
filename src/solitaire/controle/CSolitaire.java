@@ -89,7 +89,7 @@ public class CSolitaire extends Solitaire {
 		
 		frame.setJMenuBar(solitaire.getPresentation().getMenuBar());
 		
-		Dimension dim = new Dimension(600, 600);
+		Dimension dim = new Dimension(600, 650);
 		frame.setMinimumSize(dim);
 		frame.setSize(dim);
 		frame.setVisible(true);

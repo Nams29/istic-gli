@@ -45,9 +45,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			}
 		}
 	}
-
-
-
+	
 	@Override
 	public void p2cDragEnter(ICTas tas) {
 		if(this.isEmpilable(tas)){
@@ -57,9 +55,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			this.presentation.c2pDropImpossible();
 		}
 	}
-
-
-
+	
 	@Override
 	public void p2cDragExit(ICTas tas) {
 		this.presentation.c2pDragExit();
