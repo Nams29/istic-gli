@@ -41,10 +41,15 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 		}
 	}
 	
+	
 	@Override
 	public void p2cDragEnter(ICTas controller) {
-		// TODO Auto-generated method stub
-		
+		if(this.isEmpilable(controller)){
+			System.out.println("OK");
+		}
+		else{
+			System.out.println("PAS ok");
+		}	
 	}
 
 	@Override
@@ -101,6 +106,9 @@ public class CTasDeCartes extends TasDeCartes implements ICTas {
 		tas2.empiler(carte1);
 		tas2.empiler(carte2);
 		tas2.empiler(carte3);
+		
+		tas2.empiler(tas1,2);
+		
 		// Test depiler
 		tas2.empiler(usine.newCarte(9, 2));
 		tas2.depiler();

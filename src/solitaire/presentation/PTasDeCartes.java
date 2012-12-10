@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
+import solitaire.controle.CCarte;
 import solitaire.controle.ICTas;
 
 /**
@@ -125,7 +126,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 		this.cx = this.cx - this.dx;
 		this.cy = this.cy - this.dy;
 		
-		// Update the display 
+		// Update the display 		
 		this.validate();
 		this.repaint();
 	}
@@ -133,7 +134,6 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	@Override
 	public void c2pDropOK() {
 		dropEvent.dropComplete(true);
-		this.repaint();
 	}
 
 	@Override
@@ -142,9 +142,30 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	}
 
 	@Override
-	public void c2pDropPossible() {
-		// TODO Auto-generated method stub
+	public void c2pDropPossible() {	
+		try {		
+			try {
+				if(!this.controleur.isVide()){
+					//CCarte carte = (CCarte) this.controleur.getSommet();					
+					
+					//carte.getPresentation().setBorder(BorderFactory.createLineBorder(Color.GREEN));
+					//carte.getPresentation().repaint();
+					System.out.println("DROP POSSIBLE");
+				}
+				else{
+					System.out.println("todo");
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		this.repaint();
 	}
 
 	@Override
@@ -208,7 +229,6 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 		
 		@Override
 		public void dragEnter(DropTargetDragEvent dtde) {
-			//System.out.println("dragEnter "+PTasDeCartes.this.getController().getNom());
 			Transferable transf = dtde.getTransferable();
 			try {
 				
