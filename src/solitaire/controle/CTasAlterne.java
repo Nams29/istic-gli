@@ -8,10 +8,14 @@ import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasAlterne;
+import solitaire.util.Observer;
+import solitaire.util.Subject;
 
-public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
+public class CTasAlterne extends TasDeCartesAlternees implements ICTas, Subject {
 
-	private PTasAlterne presentation; 
+	private PTasAlterne presentation;
+	
+	private Observer observer;
 
 	public CTasAlterne(String nom, Usine usine) {
 		super(nom, usine);
@@ -38,8 +42,11 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		if (!this.isVide()) {
 			try {
 				CCarte c = (CCarte) this.getSommet();
+				
 				super.depiler();
+				
 				this.presentation.depiler(c.getPresentation());
+				
 			} catch (Exception e) {
 				System.out.println("Erreur en dépilant : "+e.getMessage());
 			}
@@ -75,8 +82,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			e.printStackTrace();
 		}		
 	}
-
-
+	
 	/**
 	 * Called when a drag gesture is done on the presentation
 	 * @param carte the controller of the card dragged
@@ -86,7 +92,8 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			// Si on essaye bien de dépiler la carte du sommet
 			CTasDeCartes draggedDeck = new CTasDeCartes("draggedDeck", new CUsine());
 			draggedDeck.getPresentation().setDxDy(0, 30);
-			//Si c'est un drag avec une seul carte
+			
+			// Si c'est un drag avec une seul carte
 			if (carte == (CCarte) this.getSommet()) {
 				this.depiler();
 				// Envoi du deck drag à la présentation
@@ -97,14 +104,17 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 			else{			
 				//on split le tas alternée en deux tas
 				int numCarte = this.nombre(carte) ;
+				
 				//on copie les cartes dans le nouveau tas
-				for(int i=numCarte ;i>=1 ;i-- ){
+				for(int i=numCarte; i>=1; i--){
 					draggedDeck.empiler(this.getCarte(i));
-				}		
+				}
+				
 				//on supprime les cartes du tas
-				for(int i=numCarte ;i>=1 ;i-- ){
+				for(int i=numCarte; i>=1; i-- ){
 					this.depiler();
 				}
+				
 				this.presentation.c2pDragGestureAccepted(draggedDeck.getPresentation());
 			}
 		} catch (Exception e) {
@@ -113,7 +123,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		
 	}
 
-	//Permet de récupéré la place de la carte dans le tas
+	//Permet de récupérer la place de la carte dans le tas
 
 	public int nombre(CCarte c){
 		int nbcarteTas=this.getNombre();
@@ -132,7 +142,15 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		}
 		return 0;
 	}
-
+	
+	/**
+	 * Called when the drag and drop succeeded
+	 * @param icTas
+	 */
+	public void p2cDragSuccess(ICTas tas) {
+		this.notifyObservers();
+	}
+	
 	/**
 	 * Called when the drag and drop failed
 	 * @param icTas
@@ -143,6 +161,16 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void setObserver(Observer o) {
+		this.observer = o;
+	}
+
+	@Override
+	public void notifyObservers() {
+		this.observer.update();
 	}
 
 	/**

@@ -8,7 +8,6 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
 
@@ -16,6 +15,7 @@ import javax.swing.JWindow;
 
 import solitaire.controle.CTasAlterne;
 import solitaire.controle.ICTas;
+import solitaire.listener.DragDropEndListener;
 
 public class PTasAlterne extends PTasDeCartes {
 	
@@ -62,6 +62,16 @@ public class PTasAlterne extends PTasDeCartes {
 		this.dragSource.addDragSourceMotionListener(this.dragSourceMotionListener);
 		
 		this.setDropTargetActive(true);
+	}
+	
+	@Override
+	public void empiler(PCarte p) {
+		super.empiler(p);
+	}
+	
+	@Override
+	public void depiler(PCarte p) {
+		super.depiler(p);
 	}
 	
 	@Override
@@ -133,32 +143,21 @@ public class PTasAlterne extends PTasDeCartes {
 	 * Class SabotDragSourceListener
 	 * Listen the drop events on the sabot
 	 */
-	private class TasAlterneeDragSourceListener implements DragSourceListener {
+	private class TasAlterneeDragSourceListener extends DragDropEndListener {
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
 			
-			if (!dsde.getDropSuccess()) {	
+			if (!dsde.getDropSuccess()) {
 				//(PCarte)dsde.getSource();
-				((CTasAlterne) controleur).p2cDragFails(dragDeck.getController());	
+				((CTasAlterne) controleur).p2cDragFails(dragDeck.getController());
+			}
+			else {
+				((CTasAlterne) controleur).p2cDragSuccess(dragDeck.getController());
 			}
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);
 		}
-
-		@Override
-		public void dragEnter(DragSourceDragEvent dsde) {
-			//System.out.println("drag Enter");
-		}
-
-		@Override
-		public void dragExit(DragSourceEvent dse) { }
-
-		@Override
-		public void dragOver(DragSourceDragEvent dsde) { }
-
-		@Override
-		public void dropActionChanged(DragSourceDragEvent dsde) { }
 		
 	}
 	

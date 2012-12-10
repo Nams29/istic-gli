@@ -231,7 +231,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	public boolean isDataFlavorSupported(DataFlavor df) {
 		return true;
 	}
-	
+
 	/**
 	 * Class TasDropTargetListener
 	 */

@@ -66,6 +66,8 @@ public class PColonne extends JPanel {
 		Dimension dimension = new Dimension(x, y);
 		this.setSize(dimension);
 		this.setPreferredSize(dimension);
+		
+		this.repaint();
 	}
 	
 	/**

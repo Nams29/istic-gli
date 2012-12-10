@@ -11,8 +11,9 @@ import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
 import solitaire.presentation.PTasAlterne;
 import solitaire.presentation.PTasDeCartes;
+import solitaire.util.Observer;
 
-public class CColonne extends Colonne {
+public class CColonne extends Colonne implements Observer {
 	
 	private PColonne presentation;
 	
@@ -25,6 +26,8 @@ public class CColonne extends Colonne {
 		this.alternateDeck = (CTasAlterne) this.visibles;
 		this.presentation = new PColonne(this, hiddenDeck.getPresentation(), 
 				((PTasAlterne) this.alternateDeck.getPresentation()));
+		
+		this.alternateDeck.setObserver(this);
 	}
 	
 	@Override
@@ -43,6 +46,7 @@ public class CColonne extends Colonne {
 	public void empiler(Carte c) {
 		if (this.isEmpilable(c)) {
 			super.empiler(c);
+			this.presentation.c2pFlipCard();
 		}
 	}
 	
@@ -50,6 +54,7 @@ public class CColonne extends Colonne {
 	public void empiler(Tas tas) {
 		if (this.isEmpilable(tas)) {
 			super.empiler(tas);
+			this.presentation.c2pFlipCard();
 		}
 	}
 	
@@ -57,6 +62,7 @@ public class CColonne extends Colonne {
 	public void empiler(Tas tas, int n) {
 		if (this.isEmpilable(tas, n)) {
 			super.empiler(tas, n);
+			this.presentation.c2pFlipCard();
 		}
 	}
 	
@@ -81,6 +87,11 @@ public class CColonne extends Colonne {
 	 * React to a click on the hidden deck
 	 */
 	public void p2cHiddenDeckClick() {
+		this.retournerCarte();
+	}
+	
+	@Override
+	public void update() {
 		this.retournerCarte();
 	}
 	
