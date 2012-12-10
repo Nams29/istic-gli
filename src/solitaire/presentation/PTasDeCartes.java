@@ -208,7 +208,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 		
 		@Override
 		public void dragEnter(DropTargetDragEvent dtde) {
-			System.out.println("dragEnter "+PTasDeCartes.this.getController().getNom());
+			//System.out.println("dragEnter "+PTasDeCartes.this.getController().getNom());
 			Transferable transf = dtde.getTransferable();
 			try {
 				
@@ -224,7 +224,7 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 
 		@Override
 		public void dragExit(DropTargetEvent dte) {
-			System.out.println("dragExit "+PTasDeCartes.this.getController().getNom());
+			//System.out.println("dragExit "+PTasDeCartes.this.getController().getNom());
 			controleur.p2cDragExit(sourceDeck.getController());
 		}
 
