@@ -20,7 +20,6 @@ public class PTasAlterne extends PTasDeCartes {
 	
 	private static final long serialVersionUID = -2298012852387398285L;
 	
-	
 	// Drag and Drop
 	private DragGestureEvent dragEvent;
 	private DragSource dragSource;
@@ -106,8 +105,8 @@ public class PTasAlterne extends PTasDeCartes {
 	public void c2pDragGestureAccepted(PTasDeCartes tas) {
 		this.dragDeck = tas;
 		this.dragDeck.setDropTargetActive(false);
-		// Add the deck to the drag container
 		
+		// Add the deck to the drag container
 		this.dragContainer = new JWindow((Frame) this.getRootPane().getParent());
 
 		this.dragContainer.add(tas);
@@ -115,10 +114,7 @@ public class PTasAlterne extends PTasDeCartes {
 		this.dragContainer.pack();
 		
 		this.dragSource.startDrag(dragEvent, Cursor.getPredefinedCursor(Cursor.HAND_CURSOR), dragDeck, dragSourceListener);
-		
 	}
-	
-	
 	
 	/**
 	 * Class SabotDragSourceListener
@@ -165,13 +161,13 @@ public class PTasAlterne extends PTasDeCartes {
 			
 			System.out.println("drag");
 			
-			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();			
-			//Vérification qu'on essaye bien de draguer une carte ou un tas	
+			PTasDeCartes deck = (PTasDeCartes) dge.getComponent();		
+			
+			// Check if there is a card to drag
 			if(deck.getComponentAt(dge.getDragOrigin()).getClass().toString().contains("PCarte")){	
 				PCarte card = (PCarte) deck.getComponentAt(dge.getDragOrigin());
 				((CTasAlterne) controleur).p2cDragGestureRecognized(card.getControle());
 			}
-
 		}
 		
 	}
@@ -184,7 +180,7 @@ public class PTasAlterne extends PTasDeCartes {
 		@Override
 		public void dragMouseMoved(DragSourceDragEvent dsde) {
 			/* La position que ce serait bien de donner à la souris, 
-			 * mais on peut pas parce qu'il faut être à l'extérieur de la carte */
+			 * mais on peut pas parce que le curseur doit être à l'extérieur de la carte */
 			//dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()-(dragContainer.getHeight()/2));
 			
 			dragContainer.setLocation(dsde.getX()-(dragContainer.getWidth()/2), dsde.getY()+1);
@@ -192,7 +188,5 @@ public class PTasAlterne extends PTasDeCartes {
 		}
 		
 	}
-	
-	
 	
 }

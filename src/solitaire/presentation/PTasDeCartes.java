@@ -13,7 +13,6 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import solitaire.controle.CCarte;
 import solitaire.controle.ICTas;
 
 /**
@@ -144,25 +143,18 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	@Override
 	public void c2pDropPossible() {	
 		try {		
-			try {
-				if(!this.controleur.isVide()){
-					//CCarte carte = (CCarte) this.controleur.getSommet();					
-					
-					//carte.getPresentation().setBorder(BorderFactory.createLineBorder(Color.GREEN));
-					//carte.getPresentation().repaint();
-					System.out.println("DROP POSSIBLE");
-				}
-				else{
-					System.out.println("todo");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (!this.controleur.isVide()) {
+				//CCarte carte = (CCarte) this.controleur.getSommet();					
+				
+				//carte.getPresentation().setBorder(BorderFactory.createLineBorder(Color.GREEN));
+				//carte.getPresentation().repaint();
+				System.out.println("DROP POSSIBLE");
 			}
-	
+			else {
+				System.out.println("todo");
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Impossible de récupérer la carte au sommet : "+e.getMessage());
 		}
 		
 		this.repaint();
@@ -230,11 +222,13 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 		@Override
 		public void dragEnter(DropTargetDragEvent dtde) {
 			Transferable transf = dtde.getTransferable();
+			
 			try {
-				
+				// Store the source deck of the drag
 				sourceDeck = (PTasDeCartes) transf.getTransferData(new DataFlavor(getClass(), null));
-				controleur.p2cDragEnter(sourceDeck.getController());
 				
+				// Tell the controller a drag has been detected
+				controleur.p2cDragEnter(sourceDeck.getController());
 			} catch (UnsupportedFlavorException e) {
 				System.out.println("Erreur lors du drag and drop : "+e.getMessage());
 			} catch (IOException e) {
@@ -244,7 +238,6 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 
 		@Override
 		public void dragExit(DropTargetEvent dte) {
-			//System.out.println("dragExit "+PTasDeCartes.this.getController().getNom());
 			controleur.p2cDragExit(sourceDeck.getController());
 		}
 
