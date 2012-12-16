@@ -143,8 +143,18 @@ public class PSabot extends JPanel {
 	private class RetournerCarteListener extends MouseClickListener {
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			controleur.p2cHiddenDeckClick();
+		public void mouseReleased(MouseEvent e) {
+			if (valid) controleur.p2cHiddenDeckClick();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			this.valid = true;
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			this.valid = false;
 		}
 		
 	}
