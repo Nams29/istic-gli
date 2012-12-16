@@ -16,7 +16,7 @@ public class CSolitaire extends Solitaire {
 
 	private PSolitaire presentation;
 	
-	public static int GAME_MODE = 1;
+	public static int GAME_MODE = 3;
 
 	public CSolitaire(String nom, Usine usine) {
 		super (nom, usine);
@@ -38,6 +38,14 @@ public class CSolitaire extends Solitaire {
 		for (Colonne c : this.pilesAlternees) {
 			this.presentation.addColonne(((CColonne) c).getPresentation());
 		}
+	}
+	
+	/**
+	 * Change the number of cards flipped on the sabot
+	 * @param n
+	 */
+	public void setNumberCards(int n) {
+		GAME_MODE = n;
 	}
 	
 	/**

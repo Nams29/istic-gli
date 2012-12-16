@@ -2,15 +2,18 @@ package solitaire;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 import solitaire.command.ExitCommand;
 import solitaire.command.NewGameCommand;
-import solitaire.command.OptionsCommand;
+import solitaire.command.OneCardCommand;
 import solitaire.command.ProposCommand;
+import solitaire.command.ThreeCardsCommand;
 import solitaire.listener.CommandActionListener;
 import solitaire.presentation.PSolitaire;
 
@@ -54,20 +57,32 @@ public class PSolitaireMain extends JFrame {
 		
 		JMenu mFichier = new JMenu("Fichier");
 		JMenuItem miNew = new JMenuItem("Nouvelle partie");
-		JMenuItem miOptions = new JMenuItem("Options");
 		JMenuItem miExit = new JMenuItem("Quitter");
+		
+		JMenu mOptions = new JMenu("Options");
+		JRadioButtonMenuItem  miOneCard = new JRadioButtonMenuItem("Tirer une carte");
+		JRadioButtonMenuItem  miThreeCards = new JRadioButtonMenuItem("Tirer trois cartes");
 		
 		JMenu mHelp = new JMenu("?");
 		JMenuItem miPropos = new JMenuItem("À propos");
 		mHelp.add(miPropos);
 		
 		miNew.addActionListener(new CommandActionListener(new NewGameCommand(this.controleur)));
-		miOptions.addActionListener(new CommandActionListener(new OptionsCommand(this.controleur)));
 		miExit.addActionListener(new CommandActionListener(new ExitCommand(this.controleur)));
+		miOneCard.addActionListener(new CommandActionListener(new OneCardCommand(this.controleur)));
+		miThreeCards.addActionListener(new CommandActionListener(new ThreeCardsCommand(this.controleur)));
 		miPropos.addActionListener(new CommandActionListener(new ProposCommand(this.controleur)));
 		
+		ButtonGroup cardsOptions = new ButtonGroup();
+		cardsOptions.add(miOneCard);
+		cardsOptions.add(miThreeCards);
+		
+		mOptions.add(miOneCard);
+		mOptions.add(miThreeCards);
+		miThreeCards.setSelected(true);
+		
 		mFichier.add(miNew);
-		mFichier.add(miOptions);
+		mFichier.add(mOptions);
 		mFichier.add(miExit);
 		
 		menuBar.add(mFichier);

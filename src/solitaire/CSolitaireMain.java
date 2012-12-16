@@ -59,6 +59,15 @@ public class CSolitaireMain {
 	}
 	
 	/**
+	 * Change the number of cards flipped on the sabot
+	 * @param n
+	 */
+	public void setNumberCards(int n) {
+		startGame();
+		solitaire.setNumberCards(n);
+	}
+	
+	/**
 	 * MAIN
 	 */
 	public static void main(String[] args) {
