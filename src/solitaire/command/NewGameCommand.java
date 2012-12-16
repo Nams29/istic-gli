@@ -1,13 +1,13 @@
 package solitaire.command;
 
-import solitaire.controle.CSolitaire;
+import solitaire.CSolitaireMain;
 
 public class NewGameCommand implements Command {
 	
-	private CSolitaire solitaire;
+	private CSolitaireMain solitaire;
 	
-	public NewGameCommand(CSolitaire solitaire) {
-		this.solitaire = solitaire;
+	public NewGameCommand(CSolitaireMain controleur) {
+		this.solitaire = controleur;
 	}
 	
 	@Override

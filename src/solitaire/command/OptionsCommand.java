@@ -1,13 +1,13 @@
 package solitaire.command;
 
-import solitaire.controle.CSolitaire;
+import solitaire.CSolitaireMain;
 
 public class OptionsCommand implements Command {
 	
-	private CSolitaire solitaire;
+	private CSolitaireMain solitaire;
 	
-	public OptionsCommand(CSolitaire solitaire) {
-		this.solitaire = solitaire;
+	public OptionsCommand(CSolitaireMain controleur) {
+		this.solitaire = controleur;
 	}
 	
 	@Override

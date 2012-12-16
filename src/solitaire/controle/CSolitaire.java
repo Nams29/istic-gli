@@ -41,34 +41,6 @@ public class CSolitaire extends Solitaire {
 	}
 	
 	/**
-	 * Start a new game
-	 */
-	public void newGame() {
-		System.out.println("New game");
-	}
-	
-	/**
-	 * Start a new game
-	 */
-	public void options() {
-		System.out.println("Options");
-	}
-	
-	/**
-	 * Start a new game
-	 */
-	public void propos() {
-		System.out.println("À propos");
-	}
-	
-	/**
-	 * Exit the game
-	 */
-	public void exit() {
-		System.exit(0);
-	}
-	
-	/**
 	 * @return the presentation
 	 */
 	public PSolitaire getPresentation() {
@@ -89,7 +61,7 @@ public class CSolitaire extends Solitaire {
 		
 		frame.setJMenuBar(solitaire.getPresentation().getMenuBar());
 		
-		Dimension dim = new Dimension(600, 650);
+		Dimension dim = new Dimension(840, 650);
 		frame.setMinimumSize(dim);
 		frame.setSize(dim);
 		frame.setVisible(true);

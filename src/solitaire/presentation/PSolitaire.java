@@ -5,22 +5,16 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import solitaire.command.ExitCommand;
-import solitaire.command.NewGameCommand;
-import solitaire.command.OptionsCommand;
-import solitaire.command.ProposCommand;
 import solitaire.controle.CSolitaire;
-import solitaire.listener.CommandActionListener;
 
 public class PSolitaire extends JPanel {
 	
 	private static final long serialVersionUID = -6817459451699654006L;
 	
+	@SuppressWarnings("unused")
 	private CSolitaire controleur;
 
 	private JMenuBar menuBar;
@@ -35,7 +29,6 @@ public class PSolitaire extends JPanel {
 		this.controleur = cSolitaire;
 		
 		this.initLayout();
-		this.initMenu();
 	}
 	
 	/**
@@ -57,34 +50,6 @@ public class PSolitaire extends JPanel {
 		this.colonnesPanel.setOpaque(false);
 		this.colonnesPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
 		this.add(colonnesPanel, BorderLayout.CENTER);
-	}
-	
-	/**
-	 * Initiate the menu
-	 */
-	private void initMenu() {
-		menuBar = new JMenuBar();
-		
-		JMenu mFichier = new JMenu("Fichier");
-		JMenuItem miNew = new JMenuItem("Nouvelle partie");
-		JMenuItem miOptions = new JMenuItem("Options");
-		JMenuItem miExit = new JMenuItem("Quitter");
-		
-		JMenu mHelp = new JMenu("?");
-		JMenuItem miPropos = new JMenuItem("À propos");
-		mHelp.add(miPropos);
-		
-		miNew.addActionListener(new CommandActionListener(new NewGameCommand(this.controleur)));
-		miOptions.addActionListener(new CommandActionListener(new OptionsCommand(this.controleur)));
-		miExit.addActionListener(new CommandActionListener(new ExitCommand(this.controleur)));
-		miPropos.addActionListener(new CommandActionListener(new ProposCommand(this.controleur)));
-		
-		mFichier.add(miNew);
-		mFichier.add(miOptions);
-		mFichier.add(miExit);
-		
-		menuBar.add(mFichier);
-		menuBar.add(mHelp);
 	}
 	
 	/**

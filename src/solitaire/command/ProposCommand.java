@@ -1,12 +1,12 @@
 package solitaire.command;
 
-import solitaire.controle.CSolitaire;
+import solitaire.CSolitaireMain;
 
 public class ProposCommand implements Command {
 	
-	private CSolitaire solitaire;
+	private CSolitaireMain solitaire;
 	
-	public ProposCommand(CSolitaire solitaire) {
+	public ProposCommand(CSolitaireMain solitaire) {
 		this.solitaire = solitaire;
 	}
 	
