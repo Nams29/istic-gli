@@ -2,17 +2,16 @@ package solitaire.command;
 
 import solitaire.CSolitaireMain;
 
-public class OptionsCommand implements Command {
-	
+public class ThreeCardsCommand implements Command {
 	private CSolitaireMain solitaire;
-	
-	public OptionsCommand(CSolitaireMain controleur) {
+
+	public ThreeCardsCommand(CSolitaireMain controleur) {
 		this.solitaire = controleur;
 	}
-	
+
 	@Override
 	public void execute() {
-		this.solitaire.options();
+		this.solitaire.setNumberCards(3);
 	}
 
 }

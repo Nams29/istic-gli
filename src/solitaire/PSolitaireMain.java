@@ -101,4 +101,11 @@ public class PSolitaireMain extends JFrame {
 		this.repaint();
 	}
 	
+	/**
+	 * Display the information panel
+	 */
+	public void c2pPropos() {
+		
+	}
+	
 }

@@ -45,17 +45,10 @@ public class CSolitaireMain {
 	}
 	
 	/**
-	 * Display the options
-	 */
-	public void options() {
-		System.out.println("Options");
-	}
-	
-	/**
 	 * Display the informations panel
 	 */
 	public void propos() {
-		System.out.println("À propos");
+		this.presentation.c2pPropos();
 	}
 	
 	/**

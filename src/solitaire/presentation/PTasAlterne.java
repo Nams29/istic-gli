@@ -124,7 +124,6 @@ public class PTasAlterne extends PTasDeCartes {
 	 * Called by the controler when a drag gesture is accepted
 	 * @param tas The dragged deck to display
 	 */
-	
 	public void c2pDragGestureAccepted(PTasDeCartes tas) {
 		this.dragDeck = tas;
 		this.dragDeck.setDropTargetActive(false);
@@ -149,7 +148,6 @@ public class PTasAlterne extends PTasDeCartes {
 		public void dragDropEnd(DragSourceDropEvent dsde) {
 			
 			if (!dsde.getDropSuccess()) {
-				//(PCarte)dsde.getSource();
 				((CTasAlterne) controleur).p2cDragFails(dragDeck.getController());
 			}
 			else {
@@ -184,6 +182,7 @@ public class PTasAlterne extends PTasDeCartes {
 	
 	/**
 	 * Class SabotDragSourceMotionListener
+	 * Listen the mouse movements during the drag 
 	 */
 	private class TasAlterneeDragSourceMotionListener implements DragSourceMotionListener {
 

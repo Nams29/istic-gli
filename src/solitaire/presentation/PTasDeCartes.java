@@ -41,8 +41,8 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	private int dx, dy;		// Shift between each cards
 	private int cx, cy;		// Current position of the last card
 	private Dimension dim = new Dimension(PCarte.largeur, PCarte.hauteur);
-	private Color cGreen = new Color(0, 200, 50, 100);
-	private Color cRed = new Color(200, 0, 50, 100);
+	private Color cGreen = new Color(0, 200, 50, 120);
+	private Color cRed = new Color(200, 0, 50, 120);
 	
 	/**
 	 * Create a new PTasDeCarte
@@ -165,31 +165,13 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 	}
 
 	@Override
-	public void c2pDropPossible() {	
-		try {		
-			//if (!this.controleur.isVide()) {
-				//this.add(validPanel);
-				//this.repaint();
-			//}
-			//else {
-			//	System.out.println("todo");
-			//}
-		} catch (Exception e) {
-			System.out.println("Impossible de récupérer la carte au sommet : "+e.getMessage());
-		}
-	}
+	public void c2pDropPossible() {	}
 
 	@Override
-	public void c2pDropImpossible() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void c2pDropImpossible() { }
 
 	@Override
-	public void c2pDragExit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void c2pDragExit() { }
 	
 	/**
 	 * Set the location of the stack

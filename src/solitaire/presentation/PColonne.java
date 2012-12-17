@@ -1,6 +1,5 @@
 package solitaire.presentation ;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -25,8 +24,6 @@ public class PColonne extends JPanel {
 		this.controleur = cColonne;
 		this.hiddenDeck = tas1;
 		this.alternateDeck = tas2;
-		this.alternateDeck.setBackground(Color.PINK);
-		this.alternateDeck.setOpaque(false);
 		
 		this.initLayout();
 	}
@@ -37,6 +34,8 @@ public class PColonne extends JPanel {
 	private void initLayout() {
 		this.hiddenDeck.setDxDy(DX_hidden, DY_hidden);
 		this.alternateDeck.setDxDy(DX_visible, DY_visible);
+		
+		this.alternateDeck.setOpaque(false);
 		
 		this.setLayout(null);
 		this.setOpaque(false);
