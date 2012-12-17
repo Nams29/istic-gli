@@ -147,11 +147,11 @@ public class PTasAlterne extends PTasDeCartes {
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
 			
-			if (!dsde.getDropSuccess()) {
-				((CTasAlterne) controleur).p2cDragFails(dragDeck.getController());
+			if (dsde.getDropSuccess()) {
+				((CTasAlterne) controleur).p2cDragSuccess(dragDeck.getController());
 			}
 			else {
-				((CTasAlterne) controleur).p2cDragSuccess(dragDeck.getController());
+				((CTasAlterne) controleur).p2cDragFail(dragDeck.getController());
 			}
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);

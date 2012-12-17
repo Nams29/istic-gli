@@ -225,8 +225,6 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 			Transferable transf = dtde.getTransferable();
 			
 			try {
-				//System.out.println("Drag enter : "+PTasDeCartes.this.getController().getNom());
-				
 				// Store the source deck of the drag
 				sourceDeck = (PTasDeCartes) transf.getTransferData(new DataFlavor(getClass(), null));
 				
@@ -241,8 +239,6 @@ public class PTasDeCartes extends JPanel implements Transferable, IPDropTarget {
 
 		@Override
 		public void dragExit(DropTargetEvent dte) {
-			//System.out.println("Drag exit : "+PTasDeCartes.this.getController().getNom());
-			
 			controleur.p2cDragExit(sourceDeck.getController());
 		}
 

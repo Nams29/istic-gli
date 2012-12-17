@@ -10,7 +10,7 @@ import solitaire.application.Usine;
 import solitaire.presentation.PCarte;
 import solitaire.presentation.PSabot;
 
-public class CSabot extends Sabot {
+public class CSabot extends Sabot implements ICDragSource {
 		
 	private PSabot presentation;
 	
@@ -35,7 +35,7 @@ public class CSabot extends Sabot {
 	public void retourner() throws Exception {
 		if (isRetournable()) {
 			super.retourner();
-			this.presentation.setSize();
+			this.presentation.refreshSize();
 		}
 	}
 
@@ -43,7 +43,7 @@ public class CSabot extends Sabot {
 	public void retournerCarte() throws Exception {
 		if (isCarteRetournable()) {
 			super.retournerCarte();
-			this.presentation.setSize();
+			this.presentation.refreshSize();
 		}
 	}
 	
@@ -65,10 +65,7 @@ public class CSabot extends Sabot {
 		}
 	}
 	
-	/**
-	 * Called when a drag gesture is done on the presentation
-	 * @param carte the controller of the card dragged
-	 */
+	@Override
 	public void p2cDragGestureRecognized(CCarte carte) {
 		try {
 			// Si on essaye bien de dépiler la carte du sommet
@@ -85,11 +82,13 @@ public class CSabot extends Sabot {
 		}
 	}
 	
-	/**
-	 * Called when the drag and drop failed
-	 * @param icTas
-	 */
-	public void p2cDragFails(ICTas icTas) {
+	@Override
+	public void p2cDragSuccess(ICTas tas) {
+		
+	}
+	
+	@Override
+	public void p2cDragFail(ICTas icTas) {
 		try {
 			visibleDeck.empiler(icTas.getSommet());
 		} catch (Exception e) {

@@ -11,7 +11,7 @@ import solitaire.presentation.PTasAlterne;
 import solitaire.util.Observer;
 import solitaire.util.Subject;
 
-public class CTasAlterne extends TasDeCartesAlternees implements ICTas, Subject {
+public class CTasAlterne extends TasDeCartesAlternees implements ICTas, ICDragSource, Subject {
 
 	private PTasAlterne presentation;
 	
@@ -53,6 +53,29 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas, Subject 
 		}
 	}
 	
+	/**
+	 * Return the index of a card in the deck
+	 * @param c The card
+	 * @return The index of the card
+	 */
+	public int nombre(CCarte c){
+		int nbcarteTas=this.getNombre();
+
+		if(c!=null){
+			for(int i=1; i<=nbcarteTas;i++){
+				try {
+					//System.out.println("i:"+i+ "| carte:" + getCarte(i).getValeur());
+					if(getCarte(i)==c){
+						return i;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
 	@Override
 	public void p2cDragEnter(ICTas tas) {
 		if(this.isEmpilable(tas)){
@@ -83,10 +106,7 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas, Subject 
 		}		
 	}
 	
-	/**
-	 * Called when a drag gesture is done on the presentation
-	 * @param carte the controller of the card dragged
-	 */
+	@Override
 	public void p2cDragGestureRecognized(CCarte carte) {
 		try {
 			// Si on essaye bien de dépiler la carte du sommet
@@ -122,40 +142,14 @@ public class CTasAlterne extends TasDeCartesAlternees implements ICTas, Subject 
 		}
 		
 	}
-
-	//Permet de récupérer la place de la carte dans le tas
-
-	public int nombre(CCarte c){
-		int nbcarteTas=this.getNombre();
-
-		if(c!=null){
-			for(int i=1; i<=nbcarteTas;i++){
-				try {
-					//System.out.println("i:"+i+ "| carte:" + getCarte(i).getValeur());
-					if(getCarte(i)==c){
-						return i;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return 0;
-	}
 	
-	/**
-	 * Called when the drag and drop succeeded
-	 * @param icTas
-	 */
+	@Override
 	public void p2cDragSuccess(ICTas tas) {
 		this.notifyObservers();
 	}
 	
-	/**
-	 * Called when the drag and drop failed
-	 * @param icTas
-	 */
-	public void p2cDragFails(ICTas icTas) {
+	@Override
+	public void p2cDragFail(ICTas icTas) {
 		try {
 			this.empiler(icTas);
 		} catch (Exception e) {

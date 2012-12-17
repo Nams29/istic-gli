@@ -113,12 +113,15 @@ public class PSabot extends JPanel {
 	/**
 	 * Set the size of the component
 	 */
-	public void setSize() {
+	public void refreshSize() {
 		Dimension dim = new Dimension(
 				this.hiddenDeck.getWidth()+this.visibleDeck.getWidth()+INSET_X, 
 				this.getHeight());
 		this.setSize(dim);
 		this.setPreferredSize(dim);
+		
+		this.validate();
+		this.repaint();
 	}
 	
 	/**
@@ -168,8 +171,7 @@ public class PSabot extends JPanel {
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
 			if (!dsde.getDropSuccess()) {	
-				//(PCarte)dsde.getSource();
-				controleur.p2cDragFails(dragDeck.getController());	
+				controleur.p2cDragFail(dragDeck.getController());	
 			}
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);

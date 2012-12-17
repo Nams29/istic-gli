@@ -156,9 +156,8 @@ public class PTasColore extends PTasDeCartes implements IPDropTarget {
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
-			if (!dsde.getDropSuccess()) {	
-				//(PCarte)dsde.getSource();
-				((CTasColore)controleur).p2cDragFails(dragDeck.getController());	
+			if (!dsde.getDropSuccess()) {
+				((CTasColore)controleur).p2cDragFail(dragDeck.getController());	
 			}
 			dragContainer.remove(dragDeck);
 			dragContainer.setVisible(false);

@@ -11,7 +11,7 @@ import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 import solitaire.presentation.PTasColore;
 
-public class CTasColore extends TasDeCartesColorees implements ICTas {
+public class CTasColore extends TasDeCartesColorees implements ICTas, ICDragSource {
 	
 	private PTasColore presentation;
 	
@@ -96,10 +96,7 @@ public class CTasColore extends TasDeCartesColorees implements ICTas {
 		}
 	}
 	
-	/**
-	 * Called when a drag gesture is done on the presentation
-	 * @param carte the controller of the card dragged
-	 */
+	@Override
 	public void p2cDragGestureRecognized(CCarte carte) {
 		try {
 			// Si on essaye bien de dépiler la carte du sommet
@@ -116,11 +113,13 @@ public class CTasColore extends TasDeCartesColorees implements ICTas {
 		}
 	}
 	
-	/**
-	 * Called when the drag and drop failed
-	 * @param icTas
-	 */
-	public void p2cDragFails(ICTas icTas) {
+	@Override
+	public void p2cDragSuccess(ICTas icTas) {
+		
+	}
+	
+	@Override
+	public void p2cDragFail(ICTas icTas) {
 		try {
 			this.empiler(icTas.getSommet());
 		} catch (Exception e) {
